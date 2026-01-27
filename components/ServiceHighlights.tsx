@@ -37,15 +37,15 @@ const ServiceHighlights: React.FC<{ type?: 'performance' | 'carplay' }> = ({ typ
   return (
     <section className="bg-[#050505] py-12 relative overflow-hidden border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12">
           {highlights.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-4 group">
-              <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300">
-                <item.icon className="w-6 h-6 text-brand-red group-hover:text-white transition-colors" />
+            <div key={idx} className="flex items-center gap-2 md:gap-4 group">
+              <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300">
+                <item.icon className="w-5 h-5 md:w-6 md:h-6 text-brand-red group-hover:text-white transition-colors" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-white font-display font-black text-lg uppercase leading-none tracking-tight">{item.title}</span>
-                <span className="text-slate-500 text-xs mt-1 font-medium italic">{item.desc}</span>
+              <div className="flex flex-col min-w-0">
+                <span className="text-white font-display font-black text-xs sm:text-sm md:text-lg uppercase leading-none tracking-tight truncate sm:whitespace-normal">{item.title}</span>
+                <span className="text-slate-500 text-[9px] md:text-xs mt-1 font-medium italic truncate sm:whitespace-normal">{item.desc}</span>
               </div>
             </div>
           ))}

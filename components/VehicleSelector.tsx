@@ -117,13 +117,15 @@ const VehicleSelector: React.FC<VehicleSelectorProps> = ({ onSelect, initialBran
     }
   }, [initialBrand]);
 
-  // Auto-focus search on step 1
+  // Auto-focus search on step 1 (Removed to prevent keyboard popup on mobile)
+  /* 
   useEffect(() => {
     if (step === 1 && searchInputRef.current) {
         // Prevent scroll jumping by using preventScroll option
         searchInputRef.current.focus({ preventScroll: true });
     }
   }, [step]);
+  */
 
   const filteredBrands = useMemo(() => {
     return BRANDS.filter(b => b.toLowerCase().includes(searchQuery.toLowerCase()));

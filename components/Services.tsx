@@ -72,7 +72,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceSelect }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <span className="text-brand-red font-bold uppercase tracking-widest text-[10px]">Our Expertise</span>
-          <h2 className="mt-1 text-3xl md:text-5xl font-display font-bold text-white uppercase">
+          <h2 className="mt-1 text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white uppercase leading-tight">
             Performance & <br className="md:hidden"/> Technology
           </h2>
           <div className="w-20 h-1 bg-brand-red mx-auto mt-5"></div>
