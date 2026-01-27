@@ -29,9 +29,9 @@ function App() {
   }, [activePage]);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-brand-red selection:text-white pb-20 md:pb-0">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-brand-red selection:text-white pb-20 md:pb-0 overflow-x-hidden relative">
       <Navbar activePage={activePage} setActivePage={setActivePage} />
-      <main className="relative">
+      <main className="relative w-full overflow-x-hidden">
         {activePage === 'home' ? <Home /> : <CarPlay />}
       </main>
       <Footer setActivePage={setActivePage} />

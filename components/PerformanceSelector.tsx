@@ -120,9 +120,9 @@ const PerformanceSelector: React.FC<PerformanceSelectorProps> = ({ onOrder }) =>
     const hasStage2 = selectedEngine?.stage2 !== undefined;
 
     return (
-        <section id="tuning-calc" className="py-12 md:py-16 bg-[#050505] relative">
+        <section id="tuning-calc" className="py-12 md:py-16 bg-[#050505] relative overflow-x-clip">
             {/* Background Accents */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-red/5 blur-[120px] rounded-full pointer-events-none overflow-hidden"></div>
+            <div className="absolute top-0 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-red/5 blur-[80px] md:blur-[120px] rounded-full pointer-events-none"></div>
             
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-8">

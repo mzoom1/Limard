@@ -3,6 +3,17 @@
   width: 6px;
 }
 
+/* Global Reset for Horizontal Scroll */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
