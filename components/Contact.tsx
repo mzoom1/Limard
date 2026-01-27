@@ -1,19 +1,56 @@
-import React from 'react';
-import { Check, ShieldCheck, Zap, Smartphone, Wifi, Bluetooth } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Check, ShieldCheck, Zap, Smartphone, Wifi, Bluetooth, ChevronDown, CheckCircle2, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import VehicleSelector from './VehicleSelector';
+
+const SERVICES = [
+    { label: "Stage 1 Tuning (+20-30%)", value: "Stage 1 Tuning", category: "Performance" },
+    { label: "Stage 2 Tuning (Full HW)", value: "Stage 2 Tuning", category: "Performance" },
+    { label: "Stage 3 & Custom Project", value: "Stage 3 & Custom", category: "Performance" },
+    { label: "TCU Transmission Tune", value: "TCU Transmission Tune", category: "Performance" },
+    { label: "CarPlay / Android Auto", value: "CarPlay Retrofit", category: "Tech" },
+    { label: "Exhaust & Intake Install", value: "Exhaust & Intake", category: "Hardware" },
+    { label: "General Diagnostics", value: "Diagnostics / Other", category: "Other" }
+];
 
 interface ContactProps {
   initialCar?: string;
   initialPrice?: string;
+  initialService?: string;
   type?: 'performance' | 'carplay';
 }
 
-const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, type = 'performance' }) => {
+const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initialService = '', type = 'performance' }) => {
   const [carDetails, setCarDetails] = React.useState(initialCar);
+  const [serviceType, setServiceType] = React.useState(initialService || (type === 'performance' ? 'Stage 1 Tuning' : 'CarPlay Retrofit'));
   const [submitted, setSubmitted] = React.useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showVehicleSelector, setShowVehicleSelector] = useState(false);
+  const [quickBrand, setQuickBrand] = useState<string | undefined>(undefined);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const STAGES = [
+    { id: 'Stage 1 Tuning', label: 'Stage 1', icon: <Zap className="w-4 h-4" /> },
+    { id: 'Stage 2 Tuning', label: 'Stage 2', icon: <Zap className="w-4 h-4" /> },
+    { id: 'Stage 3 & Custom', label: 'Stage 3', icon: <Zap className="w-4 h-4" /> },
+    { id: 'TCU Transmission Tune', label: 'TCU', icon: <Zap className="w-4 h-4" /> }
+  ];
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   React.useEffect(() => {
     if (initialCar) setCarDetails(initialCar);
-  }, [initialCar]);
+    if (initialService) setServiceType(initialService);
+  }, [initialCar, initialService]);
 
   // Detect brand for personality
   const detectedBrand = React.useMemo(() => {
@@ -28,23 +65,23 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, type =
 
   // Detect Stage/Service for content
   const selectedStage = React.useMemo(() => {
-    if (carDetails.includes('Stage 1')) return 'Stage 1';
-    if (carDetails.includes('Stage 2')) return 'Stage 2';
-    if (carDetails.includes('Stage 3')) return 'Stage 3';
-    if (carDetails.includes('TCU')) return 'TCU Tune';
+    if (serviceType.includes('Stage 1')) return 'Stage 1';
+    if (serviceType.includes('Stage 2')) return 'Stage 2';
+    if (serviceType.includes('Stage 3')) return 'Stage 3';
+    if (serviceType.includes('TCU')) return 'TCU Tune';
     return null;
-  }, [carDetails]);
+  }, [serviceType]);
 
   const content = {
     performance: {
       tagline: selectedStage ? `Professional ${selectedStage}` : detectedBrand ? `${detectedBrand} Tuning Specialist` : 'Limard Performance Lab',
       title: selectedStage 
-        ? `${selectedStage} <br/> Software` 
+        ? `${selectedStage} Software` 
         : detectedBrand 
-        ? `${detectedBrand} <br/> Optimization` 
-        : 'Performance <br/> Consultation',
-      price: initialPrice || '$599',
-      priceLabel: initialPrice ? ' / Estimated Rate' : ' / Stage 1 start',
+        ? `${detectedBrand} Optimization` 
+        : 'Performance Consultation',
+      price: selectedStage === 'Stage 1' ? '$599' : selectedStage === 'Stage 2' ? '$899' : selectedStage === 'Stage 3' ? '$1,499' : selectedStage === 'TCU Tune' ? '$450' : initialPrice || '$599',
+      priceLabel: (selectedStage || initialPrice) ? ' / Estimated Rate' : ' / Stage 1 start',
       benefits: selectedStage === 'Stage 2' 
         ? ['Downpipe & Intake Required', 'Optimized for 91/93 Octane', 'Pops & Bangs (Optional)']
         : selectedStage === 'Stage 3'
@@ -71,7 +108,7 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, type =
     },
     carplay: {
       tagline: detectedBrand ? `${detectedBrand} Interior Tech` : 'Limard Automotive Tech',
-      title: detectedBrand ? `${detectedBrand} <br/> Retrofit` : 'CarPlay <br/> Installation',
+      title: detectedBrand ? `${detectedBrand} Retrofit` : 'CarPlay Installation',
       price: initialPrice || '$499',
       priceLabel: initialPrice ? ' / Total estimate' : ' / Retrofit start',
       benefits: [
@@ -89,8 +126,8 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, type =
           ? 'https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?q=80&w=2000&auto=format&fit=crop'
           : detectedBrand === 'Hyundai' || detectedBrand === 'Kia'
           ? 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=2000&auto=format&fit=crop'
-          : 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2000&auto=format&fit=crop',
-      thumb1: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=600&auto=format&fit=crop',
+          : '/images/hero-carplay.avif',
+      thumb1: '/images/hero-carplay.avif',
       thumb2: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=600&auto=format&fit=crop',
       icon: <Smartphone className="w-4 h-4 text-brand-red group-hover:scale-125 transition-transform" />
     }
@@ -100,97 +137,202 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, type =
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!serviceType) {
+        setIsDropdownOpen(true);
+        return;
+    }
     setSubmitted(true);
     // In a real app, this is where you'd send to SendGrid/Hubspot/CRM
   };
 
   return (
-    <section id="contact" className="py-24 bg-white border-t border-slate-100">
+    <section 
+      ref={sectionRef}
+      id="contact" 
+      className="py-8 md:py-12 bg-white border-t border-slate-100"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
           
           {/* Image Side (Product Page Style) */}
-          <div className="relative pl-0 md:pl-0"> {/* Adjusted padding */}
-             <div className="rounded-3xl overflow-hidden shadow-2xl h-[300px] sm:h-[400px] md:h-[600px] relative z-10 transition-all duration-300">
+          <div className="relative w-full lg:flex-1">
+             <div className="-mx-4 sm:mx-0 rounded-none sm:rounded-[2rem] overflow-hidden shadow-sm h-[250px] sm:h-[350px] lg:h-[450px] relative z-10 transition-all duration-300">
                 <img 
                     src={activeContent.image} 
                     alt="Professional Installation" 
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white z-20">
-                    <div className="text-sm font-bold uppercase tracking-wider opacity-80 mb-1">Location</div>
-                    <div className="text-xl font-display font-bold">Los Angeles, CA</div>
+                <div className="absolute bottom-5 left-6 text-white z-20">
+                    <div className="text-[9px] font-bold uppercase tracking-wider opacity-80 mb-0.5">Location</div>
+                    <div className="text-base font-display font-bold">Los Angeles, CA</div>
                 </div>
              </div>
 
              {/* Thumbnail Overlays - Floating Left */}
              {/* Thumbnail 1 */}
-             <div className="absolute -left-6 top-12 w-28 h-28 rounded-2xl shadow-xl border-4 border-white overflow-hidden hidden md:block z-20 transform hover:scale-110 transition-transform duration-300">
+             <div className="absolute -left-4 top-10 w-24 h-24 rounded-2xl shadow-xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300">
                  <img src={activeContent.thumb1} alt="Detail" className="w-full h-full object-cover" />
              </div>
              
              {/* Thumbnail 2 */}
-             <div className="absolute -left-6 top-48 w-28 h-28 rounded-2xl shadow-xl border-4 border-white overflow-hidden hidden md:block z-20 transform hover:scale-110 transition-transform duration-300 delay-100">
+             <div className="absolute -left-4 top-40 w-24 h-24 rounded-2xl shadow-xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300 delay-100">
                  <img src={activeContent.thumb2} alt="Detail" className="w-full h-full object-cover" />
              </div>
           </div>
 
           {/* Form Side (Product Info Style) */}
-          <div>
-            <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">{activeContent.tagline}</span>
-            <h2 
-                className="mt-2 text-5xl font-bold text-slate-900 mb-6 tracking-tight leading-none"
-                dangerouslySetInnerHTML={{ __html: activeContent.title }}
-            />
+          <div className="w-full lg:w-[440px]">
+            <div className="flex flex-col gap-3">
+                {type === 'performance' && (
+                    <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-1 p-0.5 bg-slate-100 rounded-lg w-full sm:w-fit mb-0.5 px-1 -mt-2">
+                        {STAGES.map((stage) => (
+                            <button
+                                key={stage.id}
+                                onClick={() => setServiceType(stage.id)}
+                                className={`flex items-center gap-1 px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all whitespace-nowrap ${serviceType === stage.id ? 'bg-white text-brand-red shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                            >
+                                {stage.icon}
+                                {stage.label}
+                            </button>
+                        ))}
+                    </div>
+                )}
+                
+                <div>
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">{activeContent.tagline}</span>
+                    <h2 
+                        className="mt-0.5 text-2xl md:text-3xl font-bold text-slate-900 mb-2 tracking-tight leading-none"
+                        dangerouslySetInnerHTML={{ __html: activeContent.title }}
+                    />
+                </div>
+            </div>
             
-            <div className="flex items-center gap-4 mb-8">
-                <span className="text-3xl font-bold text-slate-900">{activeContent.price}<span className="text-lg font-normal text-slate-500">{activeContent.priceLabel}</span></span>
-                <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                    Available Slots
+            <div className="flex items-center gap-4 mb-4">
+                <span className="text-3xl font-display font-bold text-slate-900">{activeContent.price}<span className="text-sm font-normal text-slate-500 ml-1.5">{activeContent.priceLabel}</span></span>
+                <div className="bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wide flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    Available
                 </div>
             </div>
 
-            <div className="space-y-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-3 mb-4">
                 {activeContent.benefits.map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-3 text-slate-600">
-                        <Check className="h-5 w-5 text-slate-900" />
-                        <span>{benefit}</span>
+                    <div key={i} className="flex items-center gap-1.5 text-slate-600 text-[10px] font-medium">
+                        <Check className="h-2.5 w-2.5 text-slate-900 flex-shrink-0" />
+                        <span className="truncate">{benefit}</span>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 p-8 rounded-2xl mb-8 min-h-[300px] flex flex-col justify-center">
+            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl mb-4 flex flex-col justify-center shadow-sm">
                 {submitted ? (
-                    <div className="text-center animate-fade-in">
-                        <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Check className="w-8 h-8" />
+                    <div className="text-center animate-fade-in py-3">
+                        <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <Check className="w-5 h-5" />
                         </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Received!</h3>
-                        <p className="text-slate-500">Our Los Angeles team will contact you within 2 business hours with {type === 'carplay' ? 'compatibility details' : 'performance stats'} for your {carDetails || 'vehicle'}.</p>
+                        <h3 className="text-lg font-bold text-slate-900 mb-0.5">Request Received!</h3>
+                        <p className="text-slate-500 text-xs text-balance">Our team will contact you within 2 hours with {type === 'carplay' ? 'compatibility details' : 'performance stats'}.</p>
                         <button 
                             onClick={() => setSubmitted(false)}
-                            className="mt-6 text-brand-red font-bold uppercase text-xs hover:underline"
+                            className="mt-3 text-brand-red font-bold uppercase text-[9px] hover:underline"
                         >
                             Send another request
                         </button>
                     </div>
                 ) : (
                     <>
-                        <h3 className="font-bold text-slate-900 mb-4">{activeContent.formTitle}</h3>
-                        <form className="space-y-4" onSubmit={handleSubmit}>
-                            <input required type="text" className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 outline-none focus:border-slate-900 transition-colors" placeholder="Full Name" />
-                            <input 
-                                required
-                                type="text" 
-                                className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 outline-none focus:border-slate-900 transition-colors" 
-                                placeholder="Car Model & Year"
-                                value={carDetails}
-                                onChange={(e) => setCarDetails(e.target.value)}
-                            />
-                            <input required type="tel" className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-slate-900 outline-none focus:border-slate-900 transition-colors" placeholder="Phone Number" />
-                            <button type="submit" className="w-full bg-[#111111] hover:bg-black text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 group">
+                        <h3 className="font-bold text-slate-900 mb-4 text-xs uppercase tracking-widest">{activeContent.formTitle}</h3>
+                        <form className="space-y-3" onSubmit={handleSubmit}>
+                            <input required type="text" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs" placeholder="Full Name" />
+                            
+                            <div className="space-y-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div className="space-y-2">
+                                        <div className="relative">
+                                            <input 
+                                                required
+                                                type="text" 
+                                                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs" 
+                                                placeholder="Car Model & Year"
+                                                value={carDetails}
+                                                onChange={(e) => setCarDetails(e.target.value)}
+                                            />
+                                        </div>
+                                        
+                                        {/* Quick Brands */}
+                                        <div className="flex flex-wrap gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                                            {['BMW', 'Mercedes', 'Audi', 'Porsche', 'VW'].map(brand => {
+                                                const brandName = brand === 'VW' ? 'Volkswagen' : brand;
+                                                return (
+                                                    <button 
+                                                        key={brand}
+                                                        type="button"
+                                                        onClick={() => {
+                                                            setQuickBrand(brandName);
+                                                            setShowVehicleSelector(true);
+                                                        }}
+                                                        className="text-[9px] font-bold px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-400 hover:border-brand-red hover:text-brand-red transition-all flex items-center gap-1.5 whitespace-nowrap"
+                                                    >
+                                                        {brand}
+                                                    </button>
+                                                );
+                                            })}
+                                            <button 
+                                                type="button"
+                                                onClick={() => {
+                                                    setQuickBrand(undefined);
+                                                    setShowVehicleSelector(true);
+                                                }}
+                                                className="text-[9px] font-bold px-3 py-1.5 rounded-lg border border-brand-red/20 text-brand-red hover:bg-brand-red/5 transition-all flex items-center gap-1.5 whitespace-nowrap"
+                                            >
+                                                + More
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className="relative" ref={dropdownRef}>
+                                        <button 
+                                            type="button"
+                                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                            className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 transition-all font-medium text-xs flex items-center justify-between group"
+                                        >
+                                            <span className={`service-label block truncate ${serviceType ? 'text-slate-900' : 'text-slate-400'}`}>
+                                                {serviceType ? SERVICES.find(s => s.id === serviceType || s.value === serviceType)?.label : 'Select Service'}
+                                            </span>
+                                            <ChevronDown className={`w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-transform duration-300 flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                        </button>
+
+                                        <AnimatePresence>
+                                            {isDropdownOpen && (
+                                                <motion.div 
+                                                    initial={{ opacity: 0, y: 5 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: 5 }}
+                                                    className="absolute z-50 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden py-1.5 max-h-[220px] overflow-y-auto custom-scrollbar"
+                                                >
+                                                    {SERVICES.map((service, idx) => (
+                                                        <button
+                                                            key={idx}
+                                                            type="button"
+                                                            onClick={() => {
+                                                                setServiceType(service.value);
+                                                                setIsDropdownOpen(false);
+                                                            }}
+                                                            className={`w-full text-left px-4 py-2.5 text-[11px] transition-colors flex items-center justify-between group ${serviceType === service.value ? 'bg-slate-50 text-brand-red font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
+                                                        >
+                                                            <span>{service.label}</span>
+                                                            {serviceType === service.value && <CheckCircle2 className="w-3.5 h-3.5 text-brand-red" />}
+                                                        </button>
+                                                    ))}
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                </div>
+                            </div>
+                            <input required type="tel" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs" placeholder="Phone Number" />
+                            <button type="submit" className="w-full bg-[#111111] hover:bg-black text-white font-bold py-4 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group tracking-tight text-xs">
                                 {activeContent.buttonText} {activeContent.icon}
                             </button>
                         </form>
@@ -198,15 +340,55 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, type =
                 )}
             </div>
 
-            <div className="flex gap-6 text-xs font-medium text-slate-500">
-                 <span className="flex items-center gap-1"><ShieldCheck className="h-4 w-4" /> Lifetime Software Warranty</span>
-                 <span className="flex items-center gap-1"><Zap className="h-4 w-4" /> 24hr Turnaround</span>
+            <div className="flex gap-4 text-[8px] font-bold uppercase tracking-wider text-slate-400">
+                 <span className="flex items-center gap-1"><ShieldCheck className="h-2.5 w-2.5" /> Lifetime Warranty</span>
+                 <span className="flex items-center gap-1"><Zap className="h-2.5 w-2.5" /> 2h Response</span>
             </div>
 
           </div>
 
         </div>
       </div>
+
+      {/* Vehicle Selection Modal */}
+      <AnimatePresence>
+        {showVehicleSelector && (
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm"
+            >
+                <motion.div 
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    className="bg-black border border-white/10 rounded-[2.5rem] w-full max-w-5xl relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar shadow-[0_0_100px_rgba(230,0,0,0.2)]"
+                >
+                    <button 
+                        onClick={() => setShowVehicleSelector(false)}
+                        className="absolute right-8 top-8 z-50 p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors group cursor-pointer"
+                    >
+                        <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
+                    </button>
+                    
+                    <div className="py-12">
+                        <div className="text-center mb-8">
+                            <h2 className="text-3xl font-display font-bold text-white uppercase tracking-tight">Select Your Vehicle</h2>
+                            <p className="text-white/40 text-sm mt-2">Pick your car to get precise performance metrics</p>
+                        </div>
+                        <VehicleSelector 
+                            initialBrand={quickBrand}
+                            onSelect={(selection) => {
+                                setCarDetails(`${selection.brand} ${selection.model} (${selection.year})`);
+                                setShowVehicleSelector(false);
+                            }} 
+                        />
+                    </div>
+                </motion.div>
+            </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

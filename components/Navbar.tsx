@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Van, Zap, FolderOpen } from 'lucide-react';
+import { Menu, X, Phone, Van, Zap, FolderOpen, Instagram, Star, Info, MessageSquare, Calendar } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   activePage?: 'home' | 'carplay';
@@ -9,6 +10,12 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Reset isScrolled when page changes to ensure navbar starts transparent on new page
+  useEffect(() => {
+    setIsScrolled(false);
+    setIsMobileMenuOpen(false);
+  }, [activePage]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +29,6 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
     e.preventDefault();
     if (setActivePage) {
         setActivePage(page);
-        window.scrollTo(0, 0);
     }
     setIsMobileMenuOpen(false);
   };
@@ -47,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
             <div className="bg-brand-red p-1.5 rounded-sm skew-x-[-12deg]">
               <Van className="h-6 w-6 text-white skew-x-[12deg]" />
             </div>
-            <span className={`font-display font-bold text-3xl tracking-wide transition-colors uppercase ${textColorClass}`}>
+            <span className={`font-display font-black text-3xl tracking-tight transition-colors uppercase ${textColorClass}`}>
               Limard
             </span>
           </div>
@@ -113,38 +119,69 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#111111]/95 border-t border-white/10 absolute w-full shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <button onClick={(e) => handleNavClick('home', e)} className={`block w-full text-left px-3 py-4 text-base font-medium border-l-4 transition-all ${activePage === 'home' ? 'border-brand-red text-brand-red bg-white/5' : 'border-transparent text-white hover:text-brand-red'}`}>
-                Tuning & Performance
-            </button>
-            <button onClick={(e) => handleNavClick('carplay', e)} className={`block w-full text-left px-3 py-4 text-base font-medium border-l-4 transition-all ${activePage === 'carplay' ? 'border-brand-red text-brand-red bg-white/5' : 'border-transparent text-white hover:text-brand-red'}`}>
-                CarPlay Store
-            </button>
-            <a 
-                href="https://files.limard.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full text-left px-3 py-4 text-base font-medium border-l-4 border-transparent text-white hover:text-brand-red flex items-center gap-2"
-            >
-                <FolderOpen className="w-5 h-5" />
-                Files Limard
-            </a>
-            <div className="pt-4 pb-2 border-t border-white/10 mt-2">
-                <a href="tel:+12139320154" className="block px-3 py-3 text-lg font-bold text-white flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-brand-red">
-                        <Phone className="w-5 h-5" />
-                    </div>
-                    +1 (213) 932-0154
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-black border-t border-white/5 absolute w-full shadow-2xl z-40 overflow-y-auto max-h-[calc(100vh-80px)]"
+          >
+            <div className="px-6 py-8 space-y-6">
+              {/* Primary Actions (Mobile Grid) */}
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                <a href="https://www.instagram.com/limard_usa" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+                  <Instagram className="h-6 w-6 text-pink-500 mb-2" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white">Instagram</span>
                 </a>
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block mx-3 mt-4 text-center px-4 py-4 bg-brand-red text-white font-bold uppercase tracking-wider rounded-lg shadow-lg">
-                    Book Appointment
+                <a href="#testimonials" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col items-center justify-center p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+                  <Star className="h-6 w-6 text-yellow-500 mb-2" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white">Reviews</span>
                 </a>
+              </div>
+
+              {/* Functional Links */}
+              <div className="space-y-4">
+                <a href="#process" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
+                    <Info className="w-5 h-5 text-brand-red" />
+                  </div>
+                  <span className="text-sm font-bold uppercase tracking-wider">How we work</span>
+                </a>
+
+                <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
+                    <MessageSquare className="w-5 h-5 text-yellow-500" />
+                  </div>
+                  <span className="text-sm font-bold uppercase tracking-wider">Common Questions</span>
+                </a>
+                
+                <a href="https://files.limard.com/" target="_blank" className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
+                    <FolderOpen className="w-5 h-5 text-blue-500" />
+                  </div>
+                  <span className="text-sm font-bold uppercase tracking-wider">File Service</span>
+                </a>
+
+                <a href="tel:+12139320154" className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
+                    <Phone className="w-5 h-5 text-green-500" />
+                  </div>
+                  <span className="text-sm font-bold uppercase tracking-wider">Direct Call</span>
+                </a>
+              </div>
+
+              {/* Bottom CTAs */}
+              <div className="pt-8 border-t border-white/5 space-y-4">
+                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center py-4 bg-brand-red text-white font-bold uppercase tracking-widest rounded-2xl shadow-xl shadow-brand-red/20 flex items-center justify-center gap-2">
+                  <Calendar className="w-5 h-5" /> Book Appointment
+                </a>
+                <p className="text-[10px] text-white/20 text-center uppercase tracking-[0.3em] font-medium">Los Angeles, CA</p>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

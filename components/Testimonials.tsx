@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
   {
     name: "Michael Ross",
     car: "2022 Audi RS6",
-    text: "The performance gains are insane. 0-60 in under 3 seconds now. These guys know exactly what they're doing with high-end European cars.",
+    text: "The performance gains are insane. 0-60 in under 3 seconds now. These guys know exactly what they're doing with performance and luxury vehicles.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=256&auto=format&fit=crop"
   }
@@ -35,43 +35,43 @@ const testimonials: Testimonial[] = [
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section id="testimonials" className="py-12 md:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
             <div className="max-w-xl">
-                <span className="text-brand-red font-bold uppercase tracking-widest text-sm italic">Verified Reviews</span>
-                <h2 className="mt-4 text-5xl font-display font-bold text-slate-900 uppercase leading-[0.9]">
+                <span className="text-brand-red font-bold uppercase tracking-widest text-[10px] italic">Verified Reviews</span>
+                <h2 className="mt-2 text-4xl md:text-5xl font-display font-bold text-slate-900 uppercase leading-[0.9]">
                     What LA <br/> Drivers Say
                 </h2>
             </div>
-            <div className="flex items-center gap-2 bg-slate-50 px-6 py-3 rounded-2xl border border-slate-100">
+            <div className="flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-2xl border border-slate-100 self-start md:self-auto">
                 <div className="flex text-yellow-500">
-                    {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
                 </div>
-                <span className="font-bold text-slate-900">4.9/5 on Google</span>
+                <span className="font-bold text-slate-900 text-sm">4.9/5 on Google</span>
             </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pt-6 pb-8 md:pb-0 no-scrollbar snap-x snap-mandatory -mt-6">
           {testimonials.map((t, i) => (
-            <div key={i} className="group relative bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 hover:bg-[#111111] transition-all duration-500 hover:-translate-y-2">
-              <Quote className="absolute top-8 right-8 w-12 h-12 text-slate-200 group-hover:text-white/5 transition-colors" />
+            <div key={i} className="min-w-[85vw] md:min-w-0 group relative bg-slate-50 p-5 md:p-8 rounded-[2rem] border border-slate-100 hover:bg-[#111111] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/10 snap-center hover:z-10">
+              <Quote className="absolute top-6 right-6 md:top-8 md:right-8 w-8 h-8 md:w-10 md:h-10 text-slate-200 group-hover:text-white/5 transition-colors" />
               
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-8">
-                  <img src={t.image} alt={t.name} className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-lg" />
+                <div className="flex items-center gap-4 mb-5 md:mb-6">
+                  <img src={t.image} alt={t.name} className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-white shadow-lg" />
                   <div>
-                    <h4 className="font-bold text-slate-900 group-hover:text-white transition-colors">{t.name}</h4>
-                    <p className="text-xs text-brand-red font-bold uppercase tracking-wider">{t.car}</p>
+                    <h4 className="font-bold text-sm text-slate-900 group-hover:text-white transition-colors">{t.name}</h4>
+                    <p className="text-[9px] md:text-[10px] text-brand-red font-bold uppercase tracking-wider">{t.car}</p>
                   </div>
                 </div>
                 
-                <p className="text-slate-600 group-hover:text-slate-300 transition-colors leading-relaxed italic">
+                <p className="text-sm text-slate-600 group-hover:text-slate-300 transition-colors leading-relaxed italic">
                   "{t.text}"
                 </p>
 
-                <div className="mt-8 flex text-yellow-500">
-                    {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                <div className="mt-5 md:mt-6 flex text-yellow-500">
+                    {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
                 </div>
               </div>
             </div>

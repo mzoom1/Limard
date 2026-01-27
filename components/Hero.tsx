@@ -5,16 +5,14 @@ const Hero: React.FC = () => {
   
   const handleGetTuned = (e: React.MouseEvent) => {
     e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-      // Accessibility enhancement: Focus the first input after scrolling
-      setTimeout(() => {
-        const firstInput = contactSection.querySelector('input');
-        if (firstInput) {
-            (firstInput as HTMLElement).focus();
-        }
-      }, 1000);
+    const calcSection = document.getElementById('tuning-calc');
+    if (calcSection) {
+      calcSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -37,12 +35,20 @@ const Hero: React.FC = () => {
                 src="/images/hero-tuning.png"
                 alt="USA Performance Tuning"
                 className="w-full h-full object-cover object-[65%_center] md:object-center opacity-100"
+                loading="eager"
+                fetchPriority="high"
             />
         </div>
 
         {/* Cinematic Gradient Mask - Creates the 'Text Overlay' effect */}
         {/* Darker left side for text readability with a smooth transition */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-[#050505]/20 md:to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505] via-[#050505]/80 via-[#050505]/40 to-transparent"></div>
+        
+        {/* Soft Bottom Gradient to blend into the next section */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent opacity-100"></div>
+
+        {/* Slight vignettes to hide edges */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-transparent to-transparent"></div>
       </div>
 
       {/* 2. Content Layer */}
@@ -60,7 +66,7 @@ const Hero: React.FC = () => {
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-display font-bold text-white leading-[0.9] uppercase tracking-tighter">
+                <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-display font-black text-white leading-[0.9] uppercase tracking-tight">
                     Unlock <br/>
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">True Power</span>
                 </h1>
@@ -89,15 +95,20 @@ const Hero: React.FC = () => {
                 </div>
 
                 {/* Trust Stats */}
-                <div className="flex items-center gap-8 pt-8">
-                    <div className="flex flex-col">
-                        <span className="text-3xl font-bold text-white font-display">2,000+</span>
+                <div className="flex items-center justify-center lg:justify-start gap-5 sm:gap-8 pt-8 w-full lg:w-auto">
+                    <div className="flex flex-col items-center lg:items-start">
+                        <span className="text-2xl sm:text-3xl font-bold text-white font-display">2,000+</span>
                         <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Vehicles Tuned</span>
                     </div>
                     <div className="w-px h-10 bg-white/10"></div>
-                    <div className="flex flex-col">
-                        <span className="text-3xl font-bold text-white font-display">100%</span>
+                    <div className="flex flex-col items-center lg:items-start">
+                        <span className="text-2xl sm:text-3xl font-bold text-white font-display">100%</span>
                         <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Satisfaction</span>
+                    </div>
+                    <div className="w-px h-10 bg-white/10"></div>
+                    <div className="flex flex-col items-center lg:items-start">
+                        <span className="text-2xl sm:text-3xl font-bold text-white font-display">2006</span>
+                        <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Established</span>
                     </div>
                 </div>
             </div>

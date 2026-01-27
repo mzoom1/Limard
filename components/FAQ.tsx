@@ -33,17 +33,17 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 bg-slate-50">
+    <section id="faq" className="py-12 md:py-16 bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center p-2 bg-brand-red/10 rounded-xl text-brand-red mb-4">
-            <HelpCircle className="w-6 h-6" />
+            <HelpCircle className="w-5 h-5" />
           </div>
-          <h2 className="text-4xl font-display font-bold text-slate-900 uppercase tracking-tight">Questions & Answers</h2>
-          <p className="mt-4 text-slate-500">Everything you need to know about our upgrades and installation process.</p>
+          <h2 className="text-3xl font-display font-bold text-slate-900 uppercase tracking-tight">Questions & Answers</h2>
+          <p className="mt-2 text-sm text-slate-500">Everything you need to know about our upgrades and installation process.</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((faq, index) => (
             <div 
               key={index} 
@@ -51,20 +51,20 @@ const FAQ: React.FC = () => {
             >
               <button 
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-6 text-left"
+                className="w-full flex items-center justify-between p-5 text-left"
               >
-                <span className="font-bold text-slate-900 pr-8">{faq.question}</span>
+                <span className="font-bold text-slate-900 pr-8 text-sm md:text-base">{faq.question}</span>
                 {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-brand-red flex-shrink-0" />
+                  <ChevronUp className="w-4 h-4 text-brand-red flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                  <ChevronDown className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 )}
               </button>
               
               <div 
                 className={`transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}
               >
-                <div className="p-6 pt-0 text-slate-600 leading-relaxed border-t border-slate-50">
+                <div className="p-5 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-50">
                   {faq.answer}
                 </div>
               </div>
@@ -72,9 +72,9 @@ const FAQ: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center p-8 bg-[#111111] rounded-[2rem] text-white">
-            <p className="text-slate-400 mb-4 text-sm">Still have questions? Chat with our experts in LA.</p>
-            <a href="tel:+12139320154" className="text-2xl font-display font-bold hover:text-brand-red transition-colors">+1 (213) 932-0154</a>
+        <div className="mt-10 text-center p-6 bg-[#111111] rounded-3xl text-white">
+            <p className="text-slate-400 mb-2 text-xs uppercase tracking-widest font-bold">Still have questions?</p>
+            <a href="tel:+12139320154" className="text-xl font-display font-bold hover:text-brand-red transition-colors">+1 (213) 932-0154</a>
         </div>
       </div>
     </section>

@@ -35,7 +35,7 @@ const services: ServiceItem[] = [
   },
   {
     id: 6,
-    title: "Tech Retrofits",
+    title: "CarPlay Retrofit",
     description: "Wireless Apple CarPlay / Android Auto integration, digital cluster upgrades, and ambient lighting installation.",
     icon: Zap
   }
@@ -56,7 +56,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceSelect }) => {
         if (title.includes("Stage 3")) price = "$1,499+";
         if (title.includes("TCU")) price = "$399";
         if (title.includes("Exhaust")) price = "$299+";
-        if (title.includes("Retrofits")) price = "$499";
+        if (title.includes("Retrofit")) price = "$499";
         
         onServiceSelect({ title, price });
     }
@@ -68,37 +68,37 @@ const Services: React.FC<ServicesProps> = ({ onServiceSelect }) => {
   };
 
   return (
-    <section id="services" className="py-24 bg-white relative">
+    <section id="services" className="py-12 md:py-16 bg-[#050505] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="text-brand-red font-bold uppercase tracking-widest text-sm">Our Expertise</span>
-          <h2 className="mt-2 text-4xl md:text-5xl font-display font-bold text-slate-900 uppercase">
+        <div className="text-center mb-10">
+          <span className="text-brand-red font-bold uppercase tracking-widest text-[10px]">Our Expertise</span>
+          <h2 className="mt-1 text-3xl md:text-5xl font-display font-bold text-white uppercase">
             Performance & <br className="md:hidden"/> Technology
           </h2>
-          <div className="w-24 h-1 bg-brand-red mx-auto mt-6"></div>
+          <div className="w-20 h-1 bg-brand-red mx-auto mt-5"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 pt-2">
           {services.map((service) => (
             <div 
               key={service.id}
               onClick={(e) => handleServiceClick(e, service.title)}
-              className="group relative p-8 bg-white border border-slate-200 hover:border-brand-red/50 transition-all duration-300 hover:-translate-y-2 rounded-sm overflow-hidden shadow-lg shadow-slate-200/50 cursor-pointer"
+              className="group relative p-4 md:p-7 bg-[#111111] border border-white/5 hover:border-brand-red/50 transition-all duration-300 md:hover:-translate-y-1 rounded-xl md:rounded-2xl overflow-hidden shadow-2xl cursor-pointer hover:z-10"
             >
               {/* Hover Glow Effect */}
-              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-brand-red/5 blur-3xl rounded-full group-hover:bg-brand-red/10 transition-all"></div>
+              <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-brand-red/10 blur-3xl rounded-full group-hover:bg-brand-red/20 transition-all"></div>
               
               <div className="relative z-10">
-                <div className="inline-flex items-center justify-center p-3 bg-slate-50 rounded-sm text-brand-red mb-6 group-hover:scale-110 transition-transform duration-300 border border-slate-100 shadow-sm">
-                  <service.icon className="h-8 w-8" />
+                <div className="inline-flex items-center justify-center p-2 md:p-3 bg-white/5 rounded-lg md:rounded-xl text-brand-red mb-3 md:mb-5 group-hover:scale-110 transition-transform duration-300 border border-white/5 shadow-sm">
+                  <service.icon className="h-5 w-5 md:h-7 md:w-7" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 uppercase tracking-wide group-hover:text-brand-red transition-colors">
+                <h3 className="text-[12px] md:text-lg font-bold text-white mb-1.5 md:mb-2 uppercase tracking-wide group-hover:text-brand-red transition-colors leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed text-sm">
+                <p className="text-slate-500 leading-relaxed text-[10px] md:text-xs line-clamp-2 md:line-clamp-3">
                   {service.description}
                 </p>
-                <div className="mt-6 flex items-center text-brand-red text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                <div className="mt-4 md:mt-5 flex items-center text-brand-red text-[9px] md:text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                   Select Tune <span className="ml-2">→</span>
                 </div>
               </div>

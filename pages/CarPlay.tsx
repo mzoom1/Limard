@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import BrandGrid from '../components/BrandGrid';
+import ServiceHighlights from '../components/ServiceHighlights';
 import Comparison from '../components/Comparison';
 import VehicleSelector from '../components/VehicleSelector';
 import FAQ from '../components/FAQ';
@@ -42,11 +42,19 @@ const CarPlay: React.FC = () => {
                     src="/images/hero-carplay.avif"
                     alt="BMW Interior CarPlay" 
                     className="w-full h-full object-cover object-[70%_center] md:object-center opacity-100"
+                    loading="eager"
+                    fetchPriority="high"
                  />
              </div>
              
              {/* Darker left side for text readability with a smooth transition */}
-             <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-[#050505]/20 md:to-transparent"></div>
+             <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505] via-[#050505]/80 via-[#050505]/40 to-transparent"></div>
+             
+             {/* Soft Bottom Gradient to blend into the next section */}
+             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent"></div>
+
+             {/* Slight vignette from top */}
+             <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-transparent to-transparent"></div>
          </div>
          
          <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 h-screen flex flex-col justify-center">
@@ -59,13 +67,13 @@ const CarPlay: React.FC = () => {
                         <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">Wireless Tech Upgrade</span>
                      </div>
                      
-                     <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-display font-bold text-white leading-[0.85] uppercase tracking-tighter">
+                     <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-display font-black text-white leading-[0.9] uppercase tracking-tight">
                         Modernize <br/>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">Your Drive</span>
                      </h1>
                      
-                     <p className="text-lg md:text-xl text-slate-400 max-w-lg font-light leading-relaxed pl-1 border-l-2 border-brand-red/50">
-                        Install Apple CarPlay and Android Auto in your classic or modern luxury vehicle. OEM integration, crystal clear display, wire-free experience.
+                     <p className="text-base md:text-xl text-slate-400 max-w-lg font-light leading-relaxed pl-1 border-l-2 border-brand-red/50">
+                        Install Apple CarPlay and Android Auto in any classic or modern vehicle. OEM integration, crystal clear display, wire-free experience.
                      </p>
                      
                      <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto pt-4">
@@ -78,20 +86,25 @@ const CarPlay: React.FC = () => {
                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
                          </button>
                          <a href="#compatibility" className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-white/10 text-white text-base font-medium uppercase tracking-wider px-8 py-4 rounded-full transition-all hover:border-white/30 cursor-pointer">
-                            Check Compatibility
+                            Compatibility
                          </a>
                      </div>
 
                      {/* Trust Stats */}
-                     <div className="flex items-center gap-8 pt-8">
-                        <div className="flex flex-col">
-                            <span className="text-3xl font-bold text-white font-display">500+</span>
+                     <div className="flex items-center justify-center lg:justify-start gap-5 sm:gap-8 pt-8 w-full lg:w-auto">
+                        <div className="flex flex-col items-center lg:items-start">
+                            <span className="text-2xl sm:text-3xl font-bold text-white font-display">500+</span>
                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Installs Done</span>
                         </div>
-                        <div className="w-px h-10 bg-white/10"></div>
-                        <div className="flex flex-col">
-                            <span className="text-3xl font-bold text-white font-display">100%</span>
+                        <div className="w-px h-8 bg-white/10"></div>
+                        <div className="flex flex-col items-center lg:items-start">
+                            <span className="text-2xl sm:text-3xl font-bold text-white font-display">100%</span>
                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">OEM Match</span>
+                        </div>
+                        <div className="w-px h-8 bg-white/10"></div>
+                        <div className="flex flex-col items-center lg:items-start">
+                            <span className="text-2xl sm:text-3xl font-bold text-white font-display">2006</span>
+                            <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Established</span>
                         </div>
                      </div>
                  </div>
@@ -150,20 +163,20 @@ const CarPlay: React.FC = () => {
          </div>
       </section>
 
-      {/* 2. Trust Brands (Moved Up for Credibility) */}
-      <BrandGrid />
+      {/* 2. Compact Highlights (Replacing BrandGrid) */}
+      <ServiceHighlights type="carplay" />
 
       {/* 3. The Comparison (Dark Mode Section) */}
       <Comparison />
 
       {/* 4. Shopping Section (Combined Selector + Detail) */}
-      <div id="shop-section" ref={shopSectionRef} className="bg-[#050505] py-24 border-t border-white/5">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
-             <span className="text-brand-red font-bold uppercase tracking-[0.3em] text-xs">Limard Store</span>
-             <h2 className="mt-4 text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight">
+      <div id="shop-section" ref={shopSectionRef} className="bg-[#050505] py-16 md:py-20 border-t border-white/5">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
+             <span className="text-brand-red font-bold uppercase tracking-[0.3em] text-[10px]">Limard Store</span>
+             <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tight">
                 Premium Retrofit Solutions
              </h2>
-             <div className="w-12 h-1 bg-brand-red mx-auto mt-6"></div>
+             <div className="w-10 h-1 bg-brand-red mx-auto mt-5"></div>
          </div>
 
          {/* Selector */}
@@ -172,7 +185,12 @@ const CarPlay: React.FC = () => {
 
       {/* 5. Contact Section */}
       <div id="contact" ref={contactSectionRef}>
-        <Contact type="carplay" initialCar={selectedCar} initialPrice={selectedPrice} />
+        <Contact 
+            type="carplay" 
+            initialCar={selectedCar} 
+            initialPrice={selectedPrice} 
+            initialService="CarPlay Retrofit"
+        />
       </div>
 
       {/* 6. FAQ Section */}
