@@ -7,6 +7,7 @@ import Services from '../components/Services';
 import Process from '../components/Process';
 import WhyUs from '../components/WhyUs';
 import Testimonials from '../components/Testimonials';
+import InstagramFeed from '../components/InstagramFeed';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 
@@ -38,6 +39,7 @@ const Home: React.FC = () => {
       <Process />
       <WhyUs />
       <Testimonials />
+      <InstagramFeed />
       <Contact 
         type={selectedService?.type || 'performance'} 
         initialService={selectedService?.title} 

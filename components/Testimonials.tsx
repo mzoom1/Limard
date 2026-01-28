@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface Testimonial {
   name: string;
@@ -54,7 +55,14 @@ const Testimonials: React.FC = () => {
 
         <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pt-6 pb-8 md:pb-0 no-scrollbar snap-x snap-mandatory -mt-6">
           {testimonials.map((t, i) => (
-            <div key={i} className="min-w-[85vw] md:min-w-0 group relative bg-slate-50 p-5 md:p-8 rounded-[2rem] border border-slate-100 hover:bg-[#111111] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/10 snap-center hover:z-10">
+            <motion.div 
+                key={i} 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="min-w-[85vw] md:min-w-0 group relative bg-slate-50 p-5 md:p-8 rounded-[2rem] border border-slate-100 hover:bg-[#111111] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/10 snap-center hover:z-10"
+            >
               <Quote className="absolute top-6 right-6 md:top-8 md:right-8 w-8 h-8 md:w-10 md:h-10 text-slate-200 group-hover:text-white/5 transition-colors" />
               
               <div className="relative z-10">
@@ -74,7 +82,7 @@ const Testimonials: React.FC = () => {
                     {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

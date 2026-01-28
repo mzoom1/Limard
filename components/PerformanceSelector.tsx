@@ -51,7 +51,7 @@ const CustomDropdown: React.FC<{
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
                             transition={{ duration: 0.2, ease: "easeOut" }}
-                            className="absolute z-50 left-0 right-0 mt-2 bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden py-1.5 max-h-[280px] overflow-y-auto custom-scrollbar"
+                            className="absolute z-50 left-0 right-0 mt-2 bg-[#141414] border border-white/10 rounded-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] overflow-hidden py-1.5 max-h-[280px] overflow-y-auto custom-scrollbar"
                         >
                             {options.map((opt) => (
                                 <button
@@ -120,15 +120,16 @@ const PerformanceSelector: React.FC<PerformanceSelectorProps> = ({ onOrder }) =>
     const hasStage2 = selectedEngine?.stage2 !== undefined;
 
     return (
-        <section id="tuning-calc" className="py-12 md:py-16 bg-[#050505] relative overflow-x-clip">
-            {/* Background Accents */}
+        <section id="tuning-calc" className="py-12 md:py-16 bg-[#050505] relative">
+            {/* Background Texture Overlay */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(230,0,0,0.08),transparent_70%)] opacity-60 pointer-events-none"></div>
             <div className="absolute top-0 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-red/5 blur-[80px] md:blur-[120px] rounded-full pointer-events-none"></div>
             
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-8">
-                    <span className="text-brand-red font-bold uppercase tracking-widest text-[9px]">Performance Calculator</span>
-                    <h2 className="mt-1 text-2xl md:text-5xl font-display font-bold text-white uppercase tracking-tight">
-                        Calculate Your <span className="text-brand-red">Power Gains</span>
+                    <span className="text-brand-red font-bold uppercase tracking-widest text-[9px]">Interactive Configurator</span>
+                    <h2 className="mt-1 text-2xl md:text-5xl font-display font-black text-white uppercase tracking-tight">
+                        Calculate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Power Gains</span>
                     </h2>
                     <p className="mt-2 text-slate-400 max-w-xl mx-auto text-[11px] md:text-sm">
                         Select your vehicle to see exact performance improvements and pricing for Stage 1 & Stage 2 tuning.
@@ -136,8 +137,9 @@ const PerformanceSelector: React.FC<PerformanceSelectorProps> = ({ onOrder }) =>
                 </div>
 
                 {/* Selectors Grid */}
-                <div className="bg-[#111111] border border-white/5 rounded-3xl p-3 md:p-5 mb-6 shadow-2xl relative z-20">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                <div className="bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/5 rounded-3xl p-3 md:p-5 mb-6 shadow-2xl relative z-30">
+                    <div className="absolute inset-0 bg-white/[0.01] rounded-3xl pointer-events-none"></div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 relative z-10">
                         <div className="relative z-[40]">
                             <CustomDropdown
                                 label="Brand"

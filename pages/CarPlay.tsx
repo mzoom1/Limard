@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ServiceHighlights from '../components/ServiceHighlights';
 import Comparison from '../components/Comparison';
 import VehicleSelector from '../components/VehicleSelector';
@@ -31,17 +32,17 @@ const CarPlay: React.FC = () => {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#050505]">
       
       {/* 1. Cinematic Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050505]">
          {/* Background Layer - Cinematic BMW Interior */}
-         <div className="absolute inset-0 z-0">
+         <div className="absolute inset-0 z-0 pointer-events-none">
              <div className="absolute inset-0">
                  <img 
                     src="/images/hero-carplay.avif"
                     alt="BMW Interior CarPlay" 
-                    className="w-full h-full object-cover object-[70%_center] md:object-center opacity-100"
+                    className="w-full h-full object-cover object-[70%_center] md:object-center opacity-100 font-display"
                     loading="eager"
                     fetchPriority="high"
                  />
@@ -55,6 +56,18 @@ const CarPlay: React.FC = () => {
 
              {/* Slight vignette from top */}
              <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-transparent to-transparent"></div>
+
+             {/* Decorative Background Text */}
+             <div className="absolute left-0 bottom-10 w-full overflow-hidden select-none pointer-events-none opacity-[0.06]">
+               <span className="text-[25vw] font-black uppercase text-white leading-none whitespace-nowrap -ml-20 tracking-tighter">
+                 Limard
+               </span>
+             </div>
+             <div className="absolute right-0 top-1/4 select-none pointer-events-none opacity-[0.03] rotate-90 origin-right">
+               <span className="text-[10vw] font-black uppercase text-white leading-none whitespace-nowrap">
+                 Los Angeles
+               </span>
+             </div>
          </div>
          
          <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 h-screen flex flex-col justify-center">
@@ -62,50 +75,114 @@ const CarPlay: React.FC = () => {
                  
                  {/* Left Text Content */}
                  <div className="lg:col-span-7 flex flex-col items-start text-left space-y-8">
-                     <div className="inline-flex items-center gap-2 bg-[#111111]/50 border border-white/10 px-4 py-1.5 rounded-full animate-fade-in-up shadow-lg">
+                     <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-flex items-center gap-2 bg-[#111111]/50 border border-white/10 px-4 py-1.5 rounded-full shadow-lg"
+                     >
                         <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse shadow-[0_0_10px_#E60000]"></span>
                         <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">Wireless Tech Upgrade</span>
-                     </div>
+                     </motion.div>
                      
-                     <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-display font-black text-white leading-[0.9] uppercase tracking-tight">
+                     <motion.h1 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-display font-black text-white leading-[0.9] uppercase tracking-tight"
+                     >
                         Modernize <br/>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-500">Your Drive</span>
-                     </h1>
+                     </motion.h1>
                      
-                     <p className="text-base md:text-xl text-slate-400 max-w-lg font-light leading-relaxed pl-1 border-l-2 border-brand-red/50">
+                     <motion.p 
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-base md:text-xl text-slate-400 max-w-lg font-light leading-relaxed pl-1 border-l-2 border-brand-red/50"
+                     >
                         Install Apple CarPlay and Android Auto in any classic or modern vehicle. OEM integration, crystal clear display, wire-free experience.
-                     </p>
+                     </motion.p>
                      
-                     <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto pt-4">
-                         <button 
+                     <motion.div 
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto pt-4"
+                     >
+                         <motion.button 
                             onClick={scrollToShop}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             className="group relative flex items-center justify-center gap-3 bg-brand-red hover:bg-[#cc0000] text-white text-base font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all shadow-[0_0_30px_rgba(230,0,0,0.3)] hover:shadow-[0_0_50px_rgba(230,0,0,0.5)] overflow-hidden cursor-pointer"
                          >
-                             <span className="relative z-10">Select Your Car</span>
+                             {/* High-End Blurred Glow Effect */}
+                             <motion.div
+                                animate={{ 
+                                    scale: [1, 1.15, 1],
+                                    opacity: [0.4, 0.7, 0.4]
+                                }}
+                                transition={{ 
+                                    duration: 3, 
+                                    repeat: Infinity, 
+                                    ease: "easeInOut" 
+                                }}
+                                className="absolute inset-0 bg-brand-red rounded-full blur-3xl -z-10 opacity-60"
+                             />                             <motion.div
+                                animate={{ 
+                                    scale: [1, 1.3, 1],
+                                    opacity: [0.1, 0.3, 0.1]
+                                }}
+                                transition={{ 
+                                    duration: 3, 
+                                    repeat: Infinity, 
+                                    ease: "easeInOut",
+                                    delay: 0.5
+                                }}
+                                className="absolute inset-0 bg-brand-red rounded-full blur-[40px] -z-10"
+                             />                             <span className="relative z-10">Select Your Car</span>
                              <ArrowRight className="h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-                         </button>
+                             {/* Shimmer */}
+                             <div className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                             </div>
+                         </motion.button>
                          <a href="#compatibility" className="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 border border-white/10 text-white text-base font-medium uppercase tracking-wider px-8 py-4 rounded-full transition-all hover:border-white/30 cursor-pointer">
                             Compatibility
                          </a>
-                     </div>
+                     </motion.div>
 
                      {/* Trust Stats */}
                      <div className="flex items-center justify-center lg:justify-start gap-5 sm:gap-8 pt-8 w-full lg:w-auto">
-                        <div className="flex flex-col items-center lg:items-start">
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="flex flex-col items-center lg:items-start"
+                        >
                             <span className="text-2xl sm:text-3xl font-bold text-white font-display">500+</span>
                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Installs Done</span>
-                        </div>
+                        </motion.div>
                         <div className="w-px h-8 bg-white/10"></div>
-                        <div className="flex flex-col items-center lg:items-start">
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="flex flex-col items-center lg:items-start"
+                        >
                             <span className="text-2xl sm:text-3xl font-bold text-white font-display">100%</span>
                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">OEM Match</span>
-                        </div>
+                        </motion.div>
                         <div className="w-px h-8 bg-white/10"></div>
-                        <div className="flex flex-col items-center lg:items-start">
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6 }}
+                            className="flex flex-col items-center lg:items-start"
+                        >
                             <span className="text-2xl sm:text-3xl font-bold text-white font-display">2006</span>
                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Established</span>
-                        </div>
+                        </motion.div>
                      </div>
                  </div>
 
@@ -116,7 +193,12 @@ const CarPlay: React.FC = () => {
                     <div className="grid grid-cols-2 gap-4 w-full max-w-[400px]">
                         
                         {/* Card 1: Wireless (Dominant) */}
-                        <div className="col-span-2 bg-[#111111] border border-white/10 p-5 rounded-2xl shadow-2xl hover:border-brand-red/50 transition-colors group cursor-default">
+                        <motion.div 
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                            className="col-span-2 bg-[#111111] border border-white/10 p-5 rounded-2xl shadow-2xl hover:border-brand-red/50 transition-colors group cursor-default"
+                        >
                             <div className="flex justify-between items-start mb-2">
                                  <div className="p-2 bg-brand-red/20 rounded-lg text-brand-red border border-brand-red/20 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                                     <Wifi className="w-6 h-6" />
@@ -131,27 +213,42 @@ const CarPlay: React.FC = () => {
                             </div>
                             {/* Progress Bar Visual */}
                             <div className="w-full h-1.5 bg-slate-800 rounded-full mt-4 overflow-hidden">
-                                <div className="h-full bg-gradient-to-r from-brand-red to-orange-600 w-[95%] rounded-full shadow-[0_0_10px_rgba(230,0,0,0.5)]"></div>
+                                <motion.div 
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "95%" }}
+                                    transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                                    className="h-full bg-gradient-to-r from-brand-red to-orange-600 rounded-full shadow-[0_0_10px_rgba(230,0,0,0.5)]"
+                                />
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Card 2: Audio (Compact) */}
-                        <div className="bg-[#111111] border border-white/10 p-4 rounded-2xl shadow-xl hover:border-blue-500/50 transition-colors group cursor-default">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="bg-[#111111] border border-white/10 p-4 rounded-2xl shadow-xl hover:border-blue-500/50 transition-colors group cursor-default"
+                        >
                             <div className="p-2 w-fit bg-blue-500/20 rounded-lg text-blue-500 border border-blue-500/20 mb-3 group-hover:bg-blue-500 group-hover:text-white transition-all">
                                 <Music className="w-5 h-5" />
                             </div>
                             <div className="text-white font-bold text-2xl font-display tracking-wide leading-none">Lossless</div>
                             <div className="text-slate-500 text-[10px] uppercase tracking-widest mt-1">High-Res Audio</div>
-                        </div>
+                        </motion.div>
 
                         {/* Card 3: Integration (Compact) */}
-                        <div className="bg-[#111111] border border-white/10 p-4 rounded-2xl shadow-xl hover:border-green-500/50 transition-colors group cursor-default">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.6 }}
+                            className="bg-[#111111] border border-white/10 p-4 rounded-2xl shadow-xl hover:border-green-500/50 transition-colors group cursor-default"
+                        >
                             <div className="p-2 w-fit bg-green-500/20 rounded-lg text-green-500 border border-green-500/20 mb-3 group-hover:bg-green-500 group-hover:text-black transition-all">
                                 <Smartphone className="w-5 h-5" />
                             </div>
                             <div className="text-white font-bold text-2xl font-display tracking-wide leading-none">Full OEM</div>
                             <div className="text-slate-500 text-[10px] uppercase tracking-widest mt-1">Native Control</div>
-                        </div>
+                        </motion.div>
                     </div>
                  </div>
 
@@ -170,17 +267,37 @@ const CarPlay: React.FC = () => {
       <Comparison />
 
       {/* 4. Shopping Section (Combined Selector + Detail) */}
-      <div id="shop-section" ref={shopSectionRef} className="bg-[#050505] py-16 md:py-20 border-t border-white/5">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
-             <span className="text-brand-red font-bold uppercase tracking-[0.3em] text-[10px]">Limard Store</span>
-             <h2 className="mt-4 text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tight">
+      <div id="shop-section" ref={shopSectionRef} className="bg-[#050505] py-16 md:py-20 border-t border-white/5 relative overflow-hidden">
+         {/* Decorative Background Text for Shop Section */}
+         <div className="absolute left-4 top-20 select-none pointer-events-none opacity-[0.04] z-0">
+             <span className="text-[120px] font-black uppercase text-stroke transform -rotate-90 block">WIRELESS</span>
+         </div>
+         <div className="absolute -right-20 bottom-1/4 select-none pointer-events-none opacity-[0.04] z-0">
+             <span className="text-[150px] font-black uppercase text-stroke block tracking-[20px]">RETROFIT</span>
+         </div>
+
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center relative z-10">
+             <motion.span 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                className="text-brand-red font-bold uppercase tracking-[0.3em] text-[10px]"
+             >
+                Limard Store
+             </motion.span>
+             <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="mt-4 text-3xl md:text-5xl font-display font-bold text-white uppercase tracking-tight"
+             >
                 Premium Retrofit Solutions
-             </h2>
+             </motion.h2>
              <div className="w-10 h-1 bg-brand-red mx-auto mt-5"></div>
          </div>
 
          {/* Selector */}
-         <VehicleSelector onSelect={handleSelection} />
+         <div className="relative z-10">
+            <VehicleSelector onSelect={handleSelection} />
+         </div>
       </div>
 
       {/* 5. Contact Section */}

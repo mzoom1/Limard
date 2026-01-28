@@ -149,48 +149,51 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
     <section 
       ref={sectionRef}
       id="contact" 
-      className="py-8 md:py-12 bg-white border-t border-slate-100"
+      className="py-16 md:py-24 bg-white border-t border-slate-100 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Decorative Background Text */}
+      <div className="absolute right-0 bottom-20 select-none pointer-events-none opacity-[0.05] z-0">
+          <span className="text-[180px] font-black uppercase text-slate-100 transform -rotate-12 block">CONTACT</span>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
           
           {/* Image Side (Product Page Style) */}
           <div className="relative w-full lg:flex-1">
-             <div className="-mx-4 sm:mx-0 rounded-none sm:rounded-[2rem] overflow-hidden shadow-sm h-[250px] sm:h-[350px] lg:h-[450px] relative z-10 transition-all duration-300">
+             <div className="-mx-4 sm:mx-0 rounded-none sm:rounded-[2rem] overflow-hidden shadow-xl h-[250px] sm:h-[350px] lg:h-[450px] relative z-10 transition-all duration-300 border border-slate-200">
                 <img 
                     src={activeContent.image} 
                     alt="Professional Installation" 
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-5 left-6 text-white z-20">
-                    <div className="text-[9px] font-bold uppercase tracking-wider opacity-80 mb-0.5">Location</div>
-                    <div className="text-base font-display font-bold">Los Angeles, CA</div>
+                <div className="absolute bottom-6 left-8 text-white z-20">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-brand-red mb-1">Our HQ</div>
+                    <div className="text-xl font-display font-black uppercase tracking-tight">Los Angeles, CA</div>
                 </div>
              </div>
 
              {/* Thumbnail Overlays - Floating Left */}
-             {/* Thumbnail 1 */}
-             <div className="absolute -left-4 top-10 w-24 h-24 rounded-2xl shadow-xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300">
+             <div className="absolute -left-4 top-10 w-28 h-28 rounded-2xl shadow-2xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300">
                  <img src={activeContent.thumb1} alt="Detail" className="w-full h-full object-cover" />
              </div>
              
-             {/* Thumbnail 2 */}
-             <div className="absolute -left-4 top-40 w-24 h-24 rounded-2xl shadow-xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300 delay-100">
+             <div className="absolute -left-4 top-44 w-28 h-28 rounded-2xl shadow-2xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300 delay-100">
                  <img src={activeContent.thumb2} alt="Detail" className="w-full h-full object-cover" />
              </div>
           </div>
 
           {/* Form Side (Product Info Style) */}
-          <div className="w-full lg:w-[440px]">
-            <div className="flex flex-col gap-3">
+          <div className="w-full lg:w-[440px] bg-slate-50 border border-slate-200/60 p-6 md:p-8 rounded-[2rem] shadow-xl">
+            <div className="flex flex-col gap-4">
                 {type === 'performance' && (
-                    <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-1 p-0.5 bg-slate-100 rounded-lg w-full sm:w-fit mb-0.5 px-1 -mt-2">
+                    <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-1 p-1 bg-slate-200/50 rounded-xl w-full sm:w-fit mb-2">
                         {STAGES.map((stage) => (
                             <button
                                 key={stage.id}
                                 onClick={() => setServiceType(stage.id)}
-                                className={`flex items-center gap-1 px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-wider transition-all whitespace-nowrap ${serviceType === stage.id ? 'bg-white text-brand-red shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all whitespace-nowrap ${serviceType === stage.id ? 'bg-brand-red text-white shadow-lg' : 'text-slate-500 hover:text-slate-900'}`}
                             >
                                 {stage.icon}
                                 {stage.label}
@@ -200,54 +203,54 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                 )}
                 
                 <div>
-                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">{activeContent.tagline}</span>
+                    <span className="text-[10px] font-bold text-brand-red uppercase tracking-widest">{activeContent.tagline}</span>
                     <h2 
-                        className="mt-0.5 text-2xl md:text-3xl font-bold text-slate-900 mb-2 tracking-tight leading-none"
+                        className="mt-1 text-2xl md:text-3xl font-display font-black text-slate-900 mb-2 tracking-tight uppercase leading-[0.9]"
                         dangerouslySetInnerHTML={{ __html: activeContent.title }}
                     />
                 </div>
             </div>
             
-            <div className="flex items-center gap-4 mb-4">
-                <span className="text-3xl font-display font-bold text-slate-900">{activeContent.price}<span className="text-sm font-normal text-slate-500 ml-1.5">{activeContent.priceLabel}</span></span>
-                <div className="bg-green-100 text-green-700 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wide flex items-center gap-1.5">
+            <div className="flex items-center gap-4 mb-6">
+                <span className="text-3xl font-display font-black text-slate-900">{activeContent.price}<span className="text-sm font-bold text-slate-400 ml-2 uppercase tracking-wide">{activeContent.priceLabel}</span></span>
+                <div className="bg-green-500/10 text-green-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-green-500/20 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    Available
+                    Ready To Install
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-3 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 mb-6">
                 {activeContent.benefits.map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-1.5 text-slate-600 text-[10px] font-medium">
-                        <Check className="h-2.5 w-2.5 text-slate-900 flex-shrink-0" />
+                    <div key={i} className="flex items-center gap-2 text-slate-600 text-[11px] font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-brand-red flex-shrink-0" />
                         <span className="truncate">{benefit}</span>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl mb-4 flex flex-col justify-center shadow-sm">
+            <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl mb-4 shadow-sm">
                 {submitted ? (
-                    <div className="text-center animate-fade-in py-3">
-                        <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <Check className="w-5 h-5" />
+                    <div className="text-center animate-fade-in py-5">
+                        <div className="w-12 h-12 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-500/20">
+                            <Check className="w-6 h-6" />
                         </div>
-                        <h3 className="text-lg font-bold text-slate-900 mb-0.5">Request Received!</h3>
-                        <p className="text-slate-500 text-xs text-balance">Our team will contact you within 2 hours with {type === 'carplay' ? 'compatibility details' : 'performance stats'}.</p>
+                        <h3 className="text-xl font-bold text-slate-900 mb-1">Request Sent!</h3>
+                        <p className="text-slate-500 text-xs leading-relaxed">Our crew will reach out within 2 hours with availability.</p>
                         <button 
                             onClick={() => setSubmitted(false)}
-                            className="mt-3 text-brand-red font-bold uppercase text-[9px] hover:underline"
+                            className="mt-4 text-brand-red font-bold uppercase text-[10px] hover:tracking-widest transition-all"
                         >
-                            Send another request
+                            Send Another Request
                         </button>
                     </div>
                 ) : (
                     <>
-                        <h3 className="font-bold text-slate-900 mb-4 text-xs uppercase tracking-widest">{activeContent.formTitle}</h3>
-                        <form className="space-y-3" onSubmit={handleSubmit}>
-                            <input required type="text" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs" placeholder="Full Name" />
+                        <h3 className="font-bold text-slate-400 mb-5 text-[10px] uppercase tracking-[0.2em]">{activeContent.formTitle}</h3>
+                        <form className="space-y-4" onSubmit={handleSubmit}>
+                            <input required type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-5 py-4 text-slate-900 outline-none focus:border-brand-red transition-all font-medium text-xs placeholder:text-slate-400" placeholder="Full Name" />
                             
-                            <div className="space-y-2">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="space-y-3">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <div className="relative">
                                             <input 
@@ -331,8 +334,8 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                                     </div>
                                 </div>
                             </div>
-                            <input required type="tel" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs" placeholder="Phone Number" />
-                            <button type="submit" className="w-full bg-[#111111] hover:bg-black text-white font-bold py-4 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group tracking-tight text-xs">
+                            <input required type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs placeholder:text-slate-400" placeholder="Phone Number" />
+                            <button type="submit" className="w-full bg-slate-900 hover:bg-black text-white font-bold py-4 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group tracking-tight text-xs">
                                 {activeContent.buttonText} {activeContent.icon}
                             </button>
                         </form>
@@ -340,9 +343,9 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                 )}
             </div>
 
-            <div className="flex gap-4 text-[8px] font-bold uppercase tracking-wider text-slate-400">
-                 <span className="flex items-center gap-1"><ShieldCheck className="h-2.5 w-2.5" /> Lifetime Warranty</span>
-                 <span className="flex items-center gap-1"><Zap className="h-2.5 w-2.5" /> 2h Response</span>
+            <div className="flex gap-4 text-[8px] font-bold uppercase tracking-wider text-slate-500">
+                 <span className="flex items-center gap-1"><ShieldCheck className="h-2.5 w-2.5 text-brand-red" /> Lifetime Warranty</span>
+                 <span className="flex items-center gap-1"><Zap className="h-2.5 w-2.5 text-brand-red" /> 2h Response</span>
             </div>
 
           </div>

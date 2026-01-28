@@ -37,10 +37,16 @@ const BottomNav: React.FC<BottomNavProps> = ({ activePage, setActivePage }) => {
 
         <a 
           href="#contact"
-          className="flex flex-col items-center justify-center gap-1 flex-1 py-2.5 bg-brand-red text-white rounded-full shadow-[0_5px_15px_rgba(230,0,0,0.4)] transition-all active:scale-95"
+          className="flex flex-col items-center justify-center gap-1 flex-1 py-2.5 bg-brand-red text-white rounded-full shadow-[0_5px_15px_rgba(230,0,0,0.4)] transition-all active:scale-95 relative overflow-hidden"
         >
-          <Calendar className="w-5 h-5" />
-          <span className="text-[9px] font-bold uppercase tracking-tight">Book</span>
+          <motion.div
+            initial={{ opacity: 0.5, scale: 1 }}
+            animate={{ opacity: [0.5, 1, 0.5], scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-0 bg-white/10"
+          />
+          <Calendar className="w-5 h-5 relative z-10" />
+          <span className="text-[9px] font-bold uppercase tracking-tight relative z-10">Book</span>
         </a>
       </div>
     </div>
