@@ -152,8 +152,8 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
       className="py-16 md:py-24 bg-white border-t border-slate-100 relative overflow-hidden"
     >
       {/* Decorative Background Text */}
-      <div className="absolute right-0 bottom-20 select-none pointer-events-none opacity-[0.05] z-0">
-          <span className="text-[180px] font-black uppercase text-slate-100 transform -rotate-12 block">CONTACT</span>
+      <div className="absolute lg:right-0 right-4 bottom-20 select-none pointer-events-none opacity-[0.05] z-0">
+          <span className="text-[120px] md:text-[180px] font-black uppercase text-slate-100 transform -rotate-12 block">CONTACT</span>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

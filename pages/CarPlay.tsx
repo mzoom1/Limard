@@ -59,11 +59,11 @@ const CarPlay: React.FC = () => {
 
              {/* Decorative Background Text */}
              <div className="absolute left-0 bottom-10 w-full overflow-hidden select-none pointer-events-none opacity-[0.06]">
-               <span className="text-[25vw] font-black uppercase text-white leading-none whitespace-nowrap -ml-20 tracking-tighter">
+               <span className="text-[25vw] font-black uppercase text-white leading-none whitespace-nowrap lg:-ml-20 -ml-4 tracking-tighter">
                  Limard
                </span>
              </div>
-             <div className="absolute right-0 top-1/4 select-none pointer-events-none opacity-[0.03] rotate-90 origin-right">
+             <div className="absolute lg:right-0 right-4 top-1/4 select-none pointer-events-none opacity-[0.03] rotate-90 origin-right">
                <span className="text-[10vw] font-black uppercase text-white leading-none whitespace-nowrap">
                  Los Angeles
                </span>
@@ -270,10 +270,10 @@ const CarPlay: React.FC = () => {
       <div id="shop-section" ref={shopSectionRef} className="bg-[#050505] py-16 md:py-20 border-t border-white/5 relative overflow-hidden">
          {/* Decorative Background Text for Shop Section */}
          <div className="absolute left-4 top-20 select-none pointer-events-none opacity-[0.04] z-0">
-             <span className="text-[120px] font-black uppercase text-stroke transform -rotate-90 block">WIRELESS</span>
+             <span className="text-[80px] md:text-[120px] font-black uppercase text-stroke transform -rotate-90 block">WIRELESS</span>
          </div>
-         <div className="absolute -right-20 bottom-1/4 select-none pointer-events-none opacity-[0.04] z-0">
-             <span className="text-[150px] font-black uppercase text-stroke block tracking-[20px]">RETROFIT</span>
+         <div className="absolute lg:-right-20 -right-4 bottom-1/4 select-none pointer-events-none opacity-[0.04] z-0">
+             <span className="text-[100px] md:text-[150px] font-black uppercase text-stroke block tracking-[10px] md:tracking-[20px]">RETROFIT</span>
          </div>
 
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center relative z-10">

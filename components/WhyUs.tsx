@@ -8,14 +8,14 @@ const WhyUs: React.FC = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:32px_32px] opacity-[0.02]"></div>
 
         {/* Decorative Background Brands */}
-        <div className="absolute -left-10 top-1/4 select-none pointer-events-none opacity-[0.12]">
-            <span className="text-[180px] font-black uppercase text-stroke transform -rotate-90 block">BMW</span>
+        <div className="absolute lg:-left-10 -left-6 top-1/4 select-none pointer-events-none opacity-[0.12]">
+            <span className="text-[100px] md:text-[180px] font-black uppercase text-stroke transform -rotate-90 block">BMW</span>
         </div>
-        <div className="absolute -right-10 bottom-1/4 select-none pointer-events-none opacity-[0.12]">
-            <span className="text-[180px] font-black uppercase text-stroke transform rotate-90 block tracking-[10px]">AUDI</span>
+        <div className="absolute lg:-right-10 -right-6 bottom-1/4 select-none pointer-events-none opacity-[0.12]">
+            <span className="text-[100px] md:text-[180px] font-black uppercase text-stroke transform rotate-90 block tracking-[10px]">AUDI</span>
         </div>
-        <div className="absolute left-1/2 bottom-0 -translate-x-1/2 select-none pointer-events-none opacity-[0.08]">
-            <span className="text-[250px] font-black uppercase text-stroke leading-none">PORSCHE</span>
+        <div className="absolute left-1/2 bottom-0 -translate-x-1/2 select-none pointer-events-none opacity-[0.08] w-full text-center overflow-hidden">
+            <span className="text-[150px] md:text-[250px] font-black uppercase text-stroke leading-none">PORSCHE</span>
         </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

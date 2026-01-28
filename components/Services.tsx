@@ -71,7 +71,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceSelect }) => {
   return (
     <section id="services" className="py-12 md:py-16 bg-[#050505] relative overflow-hidden">
       {/* Decorative Background Text */}
-      <div className="absolute right-0 top-20 select-none pointer-events-none opacity-[0.04] translate-x-1/4">
+      <div className="absolute right-0 top-20 select-none pointer-events-none opacity-[0.04] lg:translate-x-1/4 translate-x-1/10">
           <span className="text-[15vw] font-black uppercase text-white leading-none">Modules</span>
       </div>
       
