@@ -1,4 +1,6 @@
 import React from 'react';
+import SEOHead from '../components/SEOHead';
+import { PAGE_SEO } from '../utils/seo';
 import Hero from '../components/Hero';
 import TrustBar from '../components/TrustBar';
 import PerformanceSelector from '../components/PerformanceSelector';
@@ -27,6 +29,11 @@ const Home: React.FC = () => {
 
   return (
     <div>
+      <SEOHead 
+        title={PAGE_SEO.home.title}
+        description={PAGE_SEO.home.description}
+        keywords={PAGE_SEO.home.keywords}
+      />
       <Hero />
       <TrustBar />
       <PerformanceSelector onOrder={(data) => handleServiceSelect({ 

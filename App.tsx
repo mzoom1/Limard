@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import CarPlay from './pages/CarPlay';
@@ -29,14 +30,16 @@ function App() {
   }, [activePage]);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-brand-red selection:text-white pb-20 md:pb-0 overflow-x-hidden relative">
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
-      <main className="relative w-full overflow-x-hidden">
-        {activePage === 'home' ? <Home /> : <CarPlay />}
-      </main>
-      <Footer setActivePage={setActivePage} />
-      <BottomNav activePage={activePage} setActivePage={setActivePage} />
-    </div>
+    <HelmetProvider>
+      <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-brand-red selection:text-white pb-20 md:pb-0 overflow-x-hidden relative">
+        <Navbar activePage={activePage} setActivePage={setActivePage} />
+        <main className="relative w-full overflow-x-hidden">
+          {activePage === 'home' ? <Home /> : <CarPlay />}
+        </main>
+        <Footer setActivePage={setActivePage} />
+        <BottomNav activePage={activePage} setActivePage={setActivePage} />
+      </div>
+    </HelmetProvider>
   );
 }
 
