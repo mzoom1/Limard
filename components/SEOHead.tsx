@@ -38,6 +38,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       
       {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />
+
+      {/* Favicon */}
+      <link rel="icon" type="image/png" href="/images/logo.png" />
+      <link rel="apple-touch-icon" href="/images/logo.png" />
     </Helmet>
   );
 };
