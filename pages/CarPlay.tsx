@@ -180,7 +180,7 @@ const CarPlay: React.FC = () => {
                             transition={{ delay: 0.6 }}
                             className="flex flex-col items-center lg:items-start"
                         >
-                            <span className="text-2xl sm:text-3xl font-bold text-white font-display">2006</span>
+                            <span className="text-2xl sm:text-3xl font-bold text-white font-display">2007</span>
                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">Established</span>
                         </motion.div>
                      </div>

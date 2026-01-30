@@ -2,7 +2,7 @@
 export const SEO_CONFIG = {
   siteName: 'Limard Performance',
   siteUrl: 'https://venerable-dragon-586ca8.netlify.app',
-  description: 'Professional Stage 1-3 ECU tuning, wireless CarPlay installations, and automotive tech upgrades in Los Angeles. 2,000+ vehicles tuned since 2006. Expert BMW, Audi, Mercedes tuning.',
+  description: 'Professional Stage 1-3 ECU tuning, wireless CarPlay installations, and automotive tech upgrades in Los Angeles. 2,000+ vehicles tuned since 2007. Expert BMW, Audi, Mercedes tuning.',
   ogImage: '/images/hero-tuning.png',
   twitterHandle: '@limard_usa',
   location: {
