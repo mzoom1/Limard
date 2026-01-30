@@ -70,6 +70,7 @@ const InstagramFeed: React.FC = () => {
               <img 
                 src={post.image} 
                 alt={post.caption}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white">

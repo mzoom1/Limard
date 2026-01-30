@@ -67,7 +67,7 @@ const Testimonials: React.FC = () => {
               
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-5 md:mb-6">
-                  <img src={t.image} alt={t.name} className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-white shadow-lg" />
+                  <img src={t.image} alt={t.name} loading="lazy" className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-white shadow-lg" />
                   <div>
                     <h4 className="font-bold text-sm text-slate-900 group-hover:text-white transition-colors">{t.name}</h4>
                     <p className="text-[9px] md:text-[10px] text-brand-red font-bold uppercase tracking-wider">{t.car}</p>

@@ -165,6 +165,7 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                 <img 
                     src={activeContent.image} 
                     alt="Professional Installation" 
+                    loading="lazy"
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -176,11 +177,11 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
 
              {/* Thumbnail Overlays - Floating Left */}
              <div className="absolute -left-4 top-10 w-28 h-28 rounded-2xl shadow-2xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300">
-                 <img src={activeContent.thumb1} alt="Detail" className="w-full h-full object-cover" />
+                 <img src={activeContent.thumb1} alt="Detail" loading="lazy" className="w-full h-full object-cover" />
              </div>
              
              <div className="absolute -left-4 top-44 w-28 h-28 rounded-2xl shadow-2xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300 delay-100">
-                 <img src={activeContent.thumb2} alt="Detail" className="w-full h-full object-cover" />
+                 <img src={activeContent.thumb2} alt="Detail" loading="lazy" className="w-full h-full object-cover" />
              </div>
           </div>
 
