@@ -1,5 +1,5 @@
 import React from 'react';
-import { Van, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
   setActivePage?: (page: 'home' | 'carplay') => void;
@@ -36,13 +36,8 @@ const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             
             <div className="col-span-1 md:col-span-2">
-                <div className="flex items-center gap-2 mb-6">
-                    <div className="bg-brand-red p-1 rounded-sm skew-x-[-12deg]">
-                        <Van className="h-5 w-5 text-white skew-x-[12deg]" />
-                    </div>
-                    <span className="font-display font-bold text-2xl tracking-wide text-white uppercase">
-                        Limard
-                    </span>
+                <div className="flex items-center mb-6">
+                    <img src="/images/logo.png" alt="Limard" className="h-16 w-auto object-contain" />
                 </div>
                 <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
                     Limard is your destination for automotive perfection. Specializing in Stage 1-3 performance tuning, ECU remapping, and premium Apple CarPlay integration for all major car brands.

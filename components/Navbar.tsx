@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Van, Zap, FolderOpen, Instagram, Star, Info, MessageSquare, Calendar } from 'lucide-react';
+import { Menu, X, Phone, Zap, FolderOpen, Instagram, Star, Info, MessageSquare, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
@@ -47,15 +47,14 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
           
           {/* Logo Section */}
           <div 
-            className="flex-shrink-0 flex items-center gap-2 cursor-pointer relative z-20"
+            className="flex-shrink-0 flex items-center cursor-pointer relative z-20"
             onClick={(e) => handleNavClick('home', e)}
           >
-            <div className="bg-brand-red p-1.5 rounded-sm skew-x-[-12deg]">
-              <Van className="h-6 w-6 text-white skew-x-[12deg]" />
-            </div>
-            <span className={`font-display font-black text-3xl tracking-tight transition-colors uppercase ${textColorClass}`}>
-              Limard
-            </span>
+            <img 
+              src="/images/logo.png" 
+              alt="Limard" 
+              className="h-10 md:h-14 w-auto object-contain transition-transform hover:scale-105"
+            />
           </div>
 
           {/* Desktop Nav - Centered */}
