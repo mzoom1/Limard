@@ -58,13 +58,11 @@ const Hero: React.FC = () => {
         {/* Slight vignettes to hide edges */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-transparent to-transparent"></div>
 
-        {/* Decorative Background Logo */}
-        <div className="absolute left-0 bottom-10 w-full overflow-hidden select-none pointer-events-none opacity-[0.04]">
-          <img 
-            src="/images/logo.png" 
-            alt="" 
-            className="w-[50vw] h-auto grayscale brightness-200 lg:-ml-20 -ml-4"
-          />
+        {/* Decorative Background Text */}
+        <div className="absolute left-0 bottom-10 w-full overflow-hidden select-none pointer-events-none opacity-[0.06]">
+          <span className="text-[25vw] font-black uppercase text-white leading-none whitespace-nowrap lg:-ml-20 -ml-4 tracking-tighter">
+            Limard
+          </span>
         </div>
         <div className="absolute lg:right-0 right-4 top-1/4 select-none pointer-events-none opacity-[0.03] rotate-90 origin-right">
           <span className="text-[10vw] font-black uppercase text-white leading-none whitespace-nowrap">
