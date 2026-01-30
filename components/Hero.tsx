@@ -32,13 +32,20 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Main Hero Image - Side Profile BMW M4 Competition Style */}
         <div className="absolute inset-0">
-            <img
-                src="/images/hero-tuning.png"
-                alt="USA Performance Tuning"
-                className="w-full h-full object-cover object-[65%_center] md:object-center opacity-100"
-                loading="eager"
-                fetchPriority="high"
-            />
+            <picture>
+              <source srcSet="/images/hero-tuning.avif" type="image/avif" />
+              <source srcSet="/images/hero-tuning.webp" type="image/webp" />
+              <img
+                  src="/images/hero-tuning.png"
+                  alt="Professional ECU tuning for BMW, Audi, Mercedes in Los Angeles - Stage 1 performance upgrades"
+                  className="w-full h-full object-cover object-[65%_center] md:object-center opacity-100"
+                  width="1920"
+                  height="1080"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
+              />
+            </picture>
         </div>
 
         {/* Cinematic Gradient Mask - Creates the 'Text Overlay' effect */}
