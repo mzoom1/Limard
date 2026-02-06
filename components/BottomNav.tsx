@@ -1,10 +1,10 @@
 import React from 'react';
-import { Zap, Gauge, Calendar, Phone } from 'lucide-react';
+import { Zap, Gauge, Calendar, Phone, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface BottomNavProps {
-  activePage: 'home' | 'carplay';
-  setActivePage: (page: 'home' | 'carplay') => void;
+  activePage: 'home' | 'carplay' | 'repairs';
+  setActivePage: (page: 'home' | 'carplay' | 'repairs') => void;
 }
 
 const BottomNav: React.FC<BottomNavProps> = ({ activePage, setActivePage }) => {
@@ -25,6 +25,14 @@ const BottomNav: React.FC<BottomNavProps> = ({ activePage, setActivePage }) => {
         >
           <Zap className="w-5 h-5" />
           <span className="text-[9px] font-bold uppercase tracking-tight">CarPlay</span>
+        </button>
+
+        <button 
+          onClick={() => setActivePage('repairs')}
+          className={`flex flex-col items-center justify-center gap-1 flex-1 py-2.5 rounded-full transition-all duration-300 ${activePage === 'repairs' ? 'bg-slate-900 text-white scale-105' : 'text-slate-400'}`}
+        >
+          <Wrench className="w-5 h-5" />
+          <span className="text-[9px] font-bold uppercase tracking-tight">Repairs</span>
         </button>
 
         <a 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Zap, FolderOpen, Instagram, Star, Info, MessageSquare, Calendar } from 'lucide-react';
+import { Menu, X, Phone, Zap, FolderOpen, Instagram, Star, Info, MessageSquare, Calendar, Wrench } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
-  activePage?: 'home' | 'carplay';
-  setActivePage?: (page: 'home' | 'carplay') => void;
+  activePage?: 'home' | 'carplay' | 'repairs';
+  setActivePage?: (page: 'home' | 'carplay' | 'repairs') => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) => {
@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (page: 'home' | 'carplay', e: React.MouseEvent) => {
+  const handleNavClick = (page: 'home' | 'carplay' | 'repairs', e: React.MouseEvent) => {
     e.preventDefault();
     if (setActivePage) {
         setActivePage(page);
@@ -74,6 +74,14 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
                 CarPlay
             </button>
 
+            <button 
+                onClick={(e) => handleNavClick('repairs', e)}
+                className={`flex items-center gap-2 transition-colors font-medium text-sm uppercase tracking-wider hover:text-brand-red ${activePage === 'repairs' ? 'text-brand-red' : textColorClass}`}
+            >
+                <Wrench className="w-4 h-4" />
+                Repairs
+            </button>
+
             <a 
                 href="https://files.limard.com/"
                 target="_blank"
@@ -84,12 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
                 Files
             </a>
 
-            {activePage === 'home' && (
-                <>
-                    <a href="#process" className={`transition-colors font-medium text-sm uppercase tracking-wider hover:text-brand-red ${textColorClass}`}>Process</a>
-                </>
-            )}
-          </div>
+                      </div>
 
           {/* Right Action Button */}
           <div className="hidden md:flex items-center gap-6 relative z-20">
@@ -141,13 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
 
               {/* Functional Links */}
               <div className="space-y-4">
-                <a href="#process" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
-                    <Info className="w-5 h-5 text-brand-red" />
-                  </div>
-                  <span className="text-sm font-bold uppercase tracking-wider">How we work</span>
-                </a>
-
+                
                 <a href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
                     <MessageSquare className="w-5 h-5 text-yellow-500" />
@@ -168,6 +165,13 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
                   </div>
                   <span className="text-sm font-bold uppercase tracking-wider">Direct Call</span>
                 </a>
+
+                <button onClick={(e) => { handleNavClick('repairs', e); }} className="flex items-center gap-4 text-white hover:text-brand-red transition-colors group">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-brand-red/20 transition-colors">
+                    <Wrench className="w-5 h-5 text-orange-500" />
+                  </div>
+                  <span className="text-sm font-bold uppercase tracking-wider">Repairs Lab</span>
+                </button>
               </div>
 
               {/* Bottom CTAs */}

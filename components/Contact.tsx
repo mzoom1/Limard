@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Check, ShieldCheck, Zap, Smartphone, Wifi, Bluetooth, ChevronDown, CheckCircle2, X } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Check, ShieldCheck, Zap, Smartphone, Wifi, Bluetooth, ChevronDown, CheckCircle2, X, Wrench } from 'lucide-react';
 import VehicleSelector from './VehicleSelector';
 
 const SERVICES = [
@@ -8,27 +8,55 @@ const SERVICES = [
     { label: "Stage 2 Tuning (Full HW)", value: "Stage 2 Tuning", category: "Performance" },
     { label: "Stage 3 & Custom Project", value: "Stage 3 & Custom", category: "Performance" },
     { label: "TCU Transmission Tune", value: "TCU Transmission Tune", category: "Performance" },
-    { label: "CarPlay / Android Auto", value: "CarPlay Retrofit", category: "Tech" },
-    { label: "Exhaust & Intake Install", value: "Exhaust & Intake", category: "Hardware" },
-    { label: "General Diagnostics", value: "Diagnostics / Other", category: "Other" }
+    { label: "Exhaust & Intake Install", value: "Exhaust & Intake", category: "Performance" },
+    { label: "CarPlay Retrofit", value: "CarPlay Retrofit", category: "CarPlay" },
+    { label: "ECU Repair / Diagnostics", value: "ECU Repair / Diagnostics", category: "Repairs" },
+    { label: "ECU Cloning", value: "ECU Cloning", category: "Repairs" },
+    { label: "Keys & Immobilizer", value: "Keys & Immobilizer", category: "Repairs" },
+    { label: "TCU / Mechatronic Repair", value: "TCU / Mechatronic Repair", category: "Repairs" },
+    { label: "Transmission Rebuild", value: "Transmission Rebuild", category: "Repairs" },
+    { label: "Airbag Module Reset", value: "Airbag Module Reset", category: "Repairs" },
 ];
+
+const SERVICE_FILTER: Record<string, string[]> = {
+    performance: ['Performance'],
+    carplay: ['CarPlay'],
+    repairs: ['Repairs'],
+};
 
 interface ContactProps {
   initialCar?: string;
   initialPrice?: string;
   initialService?: string;
-  type?: 'performance' | 'carplay';
+  type?: 'performance' | 'carplay' | 'repairs';
 }
 
 const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initialService = '', type = 'performance' }) => {
   const [carDetails, setCarDetails] = React.useState(initialCar);
-  const [serviceType, setServiceType] = React.useState(initialService || (type === 'performance' ? 'Stage 1 Tuning' : 'CarPlay Retrofit'));
+  const [serviceType, setServiceType] = React.useState(initialService || (type === 'repairs' ? 'ECU Repair / Diagnostics' : type === 'performance' ? 'Stage 1 Tuning' : 'CarPlay Retrofit'));
   const [submitted, setSubmitted] = React.useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showVehicleSelector, setShowVehicleSelector] = useState(false);
   const [quickBrand, setQuickBrand] = useState<string | undefined>(undefined);
+  const [selectedDownpipe, setSelectedDownpipe] = useState<string>('');
   const dropdownRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Downpipe models with prices (original price * 2.5)
+  const DOWNPIPE_MODELS = [
+    { model: '992 Carrera Cated', price: 430 * 2.5, description: 'Porsche 992 Carrera/Targa 3.0T/3.8T — Cated Downpipe' },
+    { model: '992 Carrera Catless', price: 260 * 2.5, description: 'Porsche 992 Carrera/Targa 3.0T/3.8T — Catless Downpipe' },
+    { model: '911 Turbo 205-2016', price: 350 * 2.5, description: 'Porsche 911 Turbo 2005-2016 Downpipe' },
+    { model: 'B58 Catted', price: 250 * 2.5, description: 'BMW B58 — Catted Downpipe' },
+    { model: 'B58 Catless', price: 150 * 2.5, description: 'BMW B58 — Catless Downpipe' },
+    { model: 'N55 F30', price: 140 * 2.5, description: 'BMW N55 F30 Downpipe' },
+    { model: 'N26 F30', price: 140 * 2.5, description: 'BMW N26 F30 Downpipe' },
+    { model: 'N20 F30', price: 140 * 2.5, description: 'BMW N20 F30 Downpipe' },
+    { model: 'S55', price: 330 * 2.5, description: 'BMW S55 Downpipe' },
+    { model: 'S3', price: 240 * 2.5, description: 'Audi S3 Downpipe' },
+    { model: 'Audi E888 A4B9 2.0', price: 499, description: 'Audi A4 B9 EA888 2.0T Downpipe' },
+    { model: 'Audi A6C7 2.0', price: 499, description: 'Audi A6 C7 2.0T Downpipe' },
+  ];
 
   const STAGES = [
     { id: 'Stage 1 Tuning', label: 'Stage 1', icon: <Zap className="w-4 h-4" /> },
@@ -51,6 +79,16 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
     if (initialCar) setCarDetails(initialCar);
     if (initialService) setServiceType(initialService);
   }, [initialCar, initialService]);
+
+  // Listen for custom service selection event
+  React.useEffect(() => {
+    const handleSetService = (event: CustomEvent) => {
+      setServiceType(event.detail);
+    };
+    
+    window.addEventListener('setService', handleSetService as EventListener);
+    return () => window.removeEventListener('setService', handleSetService as EventListener);
+  }, []);
 
   // Detect brand for personality
   const detectedBrand = React.useMemo(() => {
@@ -94,16 +132,8 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
             'Satisfaction Guarantee'
           ],
       formTitle: selectedStage ? `Configure your ${selectedStage}` : 'Request Quote & HP Gains',
-      buttonText: 'Get Performance Stats',
-      image: selectedStage === 'Stage 2' || selectedStage === 'Stage 3'
-        ? 'https://images.unsplash.com/photo-1600706432502-78b9b4661b01?q=80&w=2000&auto=format&fit=crop' // Deep Engine
-        : selectedStage === 'Stage 1'
-        ? 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2000&auto=format&fit=crop' // Pulley/Engine
-        : (detectedBrand === 'BMW' || detectedBrand === 'Audi' || detectedBrand === 'Mercedes') 
-        ? 'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?q=80&w=2000&auto=format&fit=crop'
-        : 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2000&auto=format&fit=crop',
-      thumb1: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=600&auto=format&fit=crop',
-      thumb2: 'https://images.unsplash.com/photo-1600706432502-78b9b4661b01?q=80&w=600&auto=format&fit=crop',
+      buttonText: 'Book Appointment',
+      image: '/images/tuning.PNG',
       icon: <Zap className="w-4 h-4 text-brand-red group-hover:scale-125 transition-transform" />
     },
     carplay: {
@@ -117,23 +147,47 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
         detectedBrand ? `Perfect ${detectedBrand} Fitment` : 'Native Steering Wheel Controls'
       ],
       formTitle: 'Check Compatibility & Pricing',
-      buttonText: 'Request Installation Info',
-      image: detectedBrand === 'BMW' 
-          ? 'https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=2000&auto=format&fit=crop'
-          : detectedBrand === 'Mercedes'
-          ? 'https://images.unsplash.com/photo-1506469717960-433ce8b6699e?q=80&w=2000&auto=format&fit=crop'
-          : detectedBrand === 'Audi'
-          ? 'https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?q=80&w=2000&auto=format&fit=crop'
-          : detectedBrand === 'Hyundai' || detectedBrand === 'Kia'
-          ? 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?q=80&w=2000&auto=format&fit=crop'
-          : '/images/hero-carplay.avif',
-      thumb1: '/images/hero-carplay.avif',
-      thumb2: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?q=80&w=600&auto=format&fit=crop',
+      buttonText: 'Book CarPlay Appointment',
+      image: '/images/tuning.PNG',
       icon: <Smartphone className="w-4 h-4 text-brand-red group-hover:scale-125 transition-transform" />
+    },
+    repairs: {
+      tagline: detectedBrand ? `${detectedBrand} Electronics Lab` : 'Limard Repair Lab',
+      title: detectedBrand ? `${detectedBrand} Module Repair` : 'Repair & Diagnostics',
+      price: initialPrice || '$149',
+      priceLabel: initialPrice ? ' / Estimated' : ' / Initial Scan',
+      benefits: [
+        'Full System Scan (Dealer Level)',
+        'Detailed Fault Report & Estimate',
+        '12-Month Warranty on Repairs'
+      ],
+      formTitle: 'Schedule Repair Service',
+      buttonText: 'Book Repair Appointment',
+      image: '/images/tuning.PNG',
+      icon: <Wrench className="w-4 h-4 text-brand-red group-hover:scale-125 transition-transform" />
     }
   };
 
   const activeContent = content[type];
+
+  // Dynamic title based on selected service
+  const getDynamicTitle = () => {
+    if (type === 'repairs' && serviceType) {
+      const serviceLabels: Record<string, string> = {
+        'ECU Repair / Diagnostics': 'ECU Repair & Diagnostics',
+        'ECU Cloning': 'ECU Cloning Service',
+        'Keys & Immobilizer': 'Keys & Immobilizer',
+        'TCU / Mechatronic Repair': 'TCU & Mechatronic Repair',
+        'Transmission Rebuild': 'Transmission Rebuild',
+        'Airbag Module Reset': 'Airbag Module Reset'
+      };
+      return serviceLabels[serviceType] || activeContent.title;
+    }
+    if (type === 'performance' && serviceType === 'Exhaust & Intake') {
+      return 'Exhaust & Intake';
+    }
+    return activeContent.title;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -174,15 +228,6 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                     <div className="text-xl font-display font-black uppercase tracking-tight">Los Angeles, CA</div>
                 </div>
              </div>
-
-             {/* Thumbnail Overlays - Floating Left */}
-             <div className="absolute -left-4 top-10 w-28 h-28 rounded-2xl shadow-2xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300">
-                 <img src={activeContent.thumb1} alt="Detail" loading="lazy" className="w-full h-full object-cover" />
-             </div>
-             
-             <div className="absolute -left-4 top-44 w-28 h-28 rounded-2xl shadow-2xl border-4 border-white overflow-hidden hidden xl:block z-20 transform hover:scale-110 transition-transform duration-300 delay-100">
-                 <img src={activeContent.thumb2} alt="Detail" loading="lazy" className="w-full h-full object-cover" />
-             </div>
           </div>
 
           {/* Form Side (Product Info Style) */}
@@ -207,18 +252,79 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                     <span className="text-[10px] font-bold text-brand-red uppercase tracking-widest">{activeContent.tagline}</span>
                     <h2 
                         className="mt-1 text-2xl md:text-3xl font-display font-black text-slate-900 mb-2 tracking-tight uppercase leading-[0.9]"
-                        dangerouslySetInnerHTML={{ __html: activeContent.title }}
-                    />
+                    >
+                        {getDynamicTitle()}
+                    </h2>
                 </div>
             </div>
             
             <div className="flex items-center gap-4 mb-6">
-                <span className="text-3xl font-display font-black text-slate-900">{activeContent.price}<span className="text-sm font-bold text-slate-400 ml-2 uppercase tracking-wide">{activeContent.priceLabel}</span></span>
+                <span className="text-3xl font-display font-black text-slate-900">
+                    {serviceType === 'Exhaust & Intake' && selectedDownpipe 
+                        ? `$${DOWNPIPE_MODELS.find(m => m.model === selectedDownpipe)?.price}`
+                        : activeContent.price
+                    }
+                    <span className="text-sm font-bold text-slate-400 ml-2 uppercase tracking-wide">
+                        {serviceType === 'Exhaust & Intake' && selectedDownpipe ? ' / Downpipe' : activeContent.priceLabel}
+                    </span>
+                </span>
                 <div className="bg-green-500/10 text-green-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-green-500/20 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
                     Ready To Install
                 </div>
             </div>
+
+            {/* Downpipe Selection - Show only when Exhaust & Intake is selected */}
+            {serviceType === 'Exhaust & Intake' && (
+                <div className="mb-6">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                        Select Downpipe Model
+                    </label>
+                    <div className="relative">
+                        <button
+                            type="button"
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className="w-full flex items-center justify-between px-4 py-3 bg-white border border-slate-200 rounded-xl text-left text-[11px] font-medium text-slate-700 hover:border-brand-red/50 focus:outline-none focus:ring-2 focus:ring-brand-red/20 transition-all"
+                        >
+                            <span className={selectedDownpipe ? 'text-slate-900' : 'text-slate-500'}>
+                                {selectedDownpipe ? selectedDownpipe : 'Choose your vehicle model...'}
+                            </span>
+                            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        <AnimatePresence>
+                            {isDropdownOpen && (
+                                <motion.div 
+                                    initial={{ opacity: 0, y: -5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -5 }}
+                                    className="absolute z-50 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden py-1.5 max-h-[220px] overflow-y-auto custom-scrollbar"
+                                >
+                                    {DOWNPIPE_MODELS.map((model, idx) => (
+                                        <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => {
+                                                setSelectedDownpipe(model.model);
+                                                setIsDropdownOpen(false);
+                                            }}
+                                            className={`w-full text-left px-4 py-2.5 text-[11px] transition-colors flex items-center justify-between group ${selectedDownpipe === model.model ? 'bg-slate-50 text-brand-red font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
+                                        >
+                                            <div>
+                                                <div className="font-medium">{model.model}</div>
+                                                <div className="text-[9px] text-slate-500">{model.description}</div>
+                                            </div>
+                                            <span className="text-[10px] font-bold text-slate-900">
+                                                ${model.price}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </div>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 mb-6">
                 {activeContent.benefits.map((benefit, i) => (
@@ -255,10 +361,9 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                                     <div className="space-y-2">
                                         <div className="relative">
                                             <input 
-                                                required
                                                 type="text" 
                                                 className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 focus:ring-0 transition-all font-medium text-xs" 
-                                                placeholder="Car Model & Year"
+                                                placeholder="Car Model & Year (Optional)"
                                                 value={carDetails}
                                                 onChange={(e) => setCarDetails(e.target.value)}
                                             />
@@ -302,7 +407,7 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                                             className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 transition-all font-medium text-xs flex items-center justify-between group"
                                         >
                                             <span className={`service-label block truncate ${serviceType ? 'text-slate-900' : 'text-slate-400'}`}>
-                                                {serviceType ? SERVICES.find(s => s.id === serviceType || s.value === serviceType)?.label : 'Select Service'}
+                                                {serviceType ? SERVICES.find(s => s.value === serviceType)?.label || serviceType : 'Select Service'}
                                             </span>
                                             <ChevronDown className={`w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-transform duration-300 flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                                         </button>
@@ -315,7 +420,7 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                                                     exit={{ opacity: 0, y: 5 }}
                                                     className="absolute z-50 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-2xl overflow-hidden py-1.5 max-h-[220px] overflow-y-auto custom-scrollbar"
                                                 >
-                                                    {SERVICES.map((service, idx) => (
+                                                    {SERVICES.filter(s => SERVICE_FILTER[type]?.includes(s.category)).map((service, idx) => (
                                                         <button
                                                             key={idx}
                                                             type="button"

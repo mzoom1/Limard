@@ -2,12 +2,12 @@ import React from 'react';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
-  setActivePage?: (page: 'home' | 'carplay') => void;
+  setActivePage?: (page: 'home' | 'carplay' | 'repairs') => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
 
-  const handleNavigation = (e: React.MouseEvent, page: 'home' | 'carplay', sectionId?: string) => {
+  const handleNavigation = (e: React.MouseEvent, page: 'home' | 'carplay' | 'repairs', sectionId?: string) => {
     e.preventDefault();
     if (setActivePage) {
         setActivePage(page);
@@ -37,7 +37,11 @@ const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
             
             <div className="col-span-1 md:col-span-2">
                 <div className="flex items-center mb-6">
-                    <img src="/images/logo.png" alt="Limard" className="h-16 w-auto object-contain" />
+                    <img 
+                    src="/images/logo.png" 
+                    alt="Limard" 
+                    className="h-16 w-auto object-contain"
+                  />
                 </div>
                 <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
                     Limard is your destination for automotive perfection. Specializing in Stage 1-3 performance tuning, ECU remapping, and premium Apple CarPlay integration for all major car brands.
@@ -76,6 +80,11 @@ const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
                         <li>
                             <button onClick={(e) => handleNavigation(e, 'home', 'services')} className="hover:text-brand-red transition-colors text-left">
                                 Exhaust Systems
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={(e) => handleNavigation(e, 'repairs')} className="hover:text-brand-red transition-colors text-left">
+                                ECU Repair & Diagnostics
                             </button>
                         </li>
                     </ul>

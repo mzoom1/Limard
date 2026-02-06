@@ -455,11 +455,58 @@ export const TUNING_DATA: BrandData[] = [
         name: "911",
         generations: [
           {
+            name: "997 mk2 (2008-2011)",
+            engines: [
+              { name: "Carrera (345hp)", volume: "3614cc", stock: { hp: 345, torque: 390 }, stage1: { hp: 370, torque: 420, price: 650 } },
+              { name: "Carrera S (385hp)", volume: "3824cc", stock: { hp: 385, torque: 420 }, stage1: { hp: 410, torque: 450, price: 650 } },
+              { name: "Carrera 4 (345hp)", volume: "3614cc", stock: { hp: 345, torque: 390 }, stage1: { hp: 370, torque: 420, price: 650 } },
+              { name: "Carrera 4S (385hp)", volume: "3824cc", stock: { hp: 385, torque: 420 }, stage1: { hp: 410, torque: 450, price: 650 } },
+              { name: "Carrera GTS (408hp)", volume: "3800cc", stock: { hp: 408, torque: 420 }, stage1: { hp: 435, torque: 450, price: 700 } },
+              { name: "Targa 4 (345hp)", volume: "3614cc", stock: { hp: 345, torque: 390 }, stage1: { hp: 370, torque: 420, price: 650 } },
+              { name: "Targa 4S (385hp)", volume: "3824cc", stock: { hp: 385, torque: 420 }, stage1: { hp: 410, torque: 450, price: 650 } },
+              { name: "Turbo (500hp)", volume: "3800cc", stock: { hp: 500, torque: 650 }, stage1: { hp: 580, torque: 850, price: 950 } },
+              { name: "Turbo S (530hp)", volume: "3800cc", stock: { hp: 530, torque: 700 }, stage1: { hp: 620, torque: 920, price: 950 } }
+            ]
+          },
+          {
+            name: "997 mk1 (2004-2008)",
+            engines: [
+              { name: "Carrera (325hp)", volume: "3596cc", stock: { hp: 325, torque: 370 }, stage1: { hp: 350, torque: 400, price: 650 } },
+              { name: "Carrera S (355hp)", volume: "3824cc", stock: { hp: 355, torque: 400 }, stage1: { hp: 380, torque: 430, price: 650 } },
+              { name: "Carrera 4 (325hp)", volume: "3596cc", stock: { hp: 325, torque: 370 }, stage1: { hp: 350, torque: 400, price: 650 } },
+              { name: "Carrera 4S (355hp)", volume: "3824cc", stock: { hp: 355, torque: 400 }, stage1: { hp: 380, torque: 430, price: 650 } },
+              { name: "Turbo (480hp)", volume: "3600cc", stock: { hp: 480, torque: 620 }, stage1: { hp: 550, torque: 800, price: 900 } },
+              { name: "Turbo S (530hp)", volume: "3600cc", stock: { hp: 530, torque: 680 }, stage1: { hp: 600, torque: 880, price: 950 } },
+              { name: "GT3 (415hp)", volume: "3600cc", stock: { hp: 415, torque: 405 }, stage1: { hp: 440, torque: 430, price: 800 } },
+              { name: "GT3 RS (450hp)", volume: "3797cc", stock: { hp: 450, torque: 430 }, stage1: { hp: 475, torque: 455, price: 900 } }
+            ]
+          },
+          {
+            name: "991.1 (2011-2015)",
+            engines: [
+              { name: "Carrera (350hp)", volume: "3436cc", stock: { hp: 350, torque: 390 }, stage1: { hp: 400, torque: 460, price: 750 } },
+              { name: "Carrera S (400hp)", volume: "3800cc", stock: { hp: 400, torque: 440 }, stage1: { hp: 450, torque: 520, price: 750 } },
+              { name: "Carrera 4 (350hp)", volume: "3436cc", stock: { hp: 350, torque: 390 }, stage1: { hp: 400, torque: 460, price: 750 } },
+              { name: "Carrera 4S (400hp)", volume: "3800cc", stock: { hp: 400, torque: 440 }, stage1: { hp: 450, torque: 520, price: 750 } },
+              { name: "Turbo (520hp)", volume: "3800cc", stock: { hp: 520, torque: 660 }, stage1: { hp: 600, torque: 860, price: 1000 } },
+              { name: "Turbo S (560hp)", volume: "3800cc", stock: { hp: 560, torque: 700 }, stage1: { hp: 640, torque: 900, price: 1100 } },
+              { name: "GT3 (475hp)", volume: "3799cc", stock: { hp: 475, torque: 440 }, stage1: { hp: 495, torque: 460, price: 850 } },
+              { name: "GT3 RS (500hp)", volume: "3996cc", stock: { hp: 500, torque: 460 }, stage1: { hp: 520, torque: 480, price: 950 } }
+            ]
+          },
+          {
             name: "991.2 (2016-2019)",
             engines: [
               { name: "Carrera (370hp)", volume: "2981cc", stock: { hp: 370, torque: 450 }, stage1: { hp: 470, torque: 580, price: 950 } },
               { name: "Carrera S (420hp)", volume: "2981cc", stock: { hp: 420, torque: 500 }, stage1: { hp: 500, torque: 620, price: 950 } },
-              { name: "Turbo S (580hp)", volume: "3800cc", stock: { hp: 580, torque: 700 }, stage1: { hp: 640, torque: 850, price: 1200 } }
+              { name: "Carrera 4 (370hp)", volume: "2981cc", stock: { hp: 370, torque: 450 }, stage1: { hp: 470, torque: 580, price: 950 } },
+              { name: "Carrera 4S (420hp)", volume: "2981cc", stock: { hp: 420, torque: 500 }, stage1: { hp: 500, torque: 620, price: 950 } },
+              { name: "Carrera GTS (450hp)", volume: "2981cc", stock: { hp: 450, torque: 550 }, stage1: { hp: 530, torque: 680, price: 1000 } },
+              { name: "Turbo (540hp)", volume: "3800cc", stock: { hp: 540, torque: 660 }, stage1: { hp: 620, torque: 840, price: 1200 } },
+              { name: "Turbo S (580hp)", volume: "3800cc", stock: { hp: 580, torque: 700 }, stage1: { hp: 640, torque: 850, price: 1200 } },
+              { name: "GT3 (500hp)", volume: "3996cc", stock: { hp: 500, torque: 460 }, stage1: { hp: 520, torque: 480, price: 900 } },
+              { name: "GT3 RS (520hp)", volume: "3996cc", stock: { hp: 520, torque: 470 }, stage1: { hp: 540, torque: 490, price: 1000 } },
+              { name: "GT2 RS (700hp)", volume: "3800cc", stock: { hp: 700, torque: 750 }, stage1: { hp: 780, torque: 900, price: 1500 } }
             ]
           },
           {
@@ -467,7 +514,13 @@ export const TUNING_DATA: BrandData[] = [
             engines: [
               { name: "Carrera (385hp)", volume: "2981cc", stock: { hp: 385, torque: 450 }, stage1: { hp: 480, torque: 600, price: 1100 } },
               { name: "Carrera S (450hp)", volume: "2981cc", stock: { hp: 450, torque: 530 }, stage1: { hp: 530, torque: 650, price: 1100 } },
-              { name: "Turbo S (650hp)", volume: "3745cc", stock: { hp: 650, torque: 800 }, stage1: { hp: 720, torque: 920, price: 1400 } }
+              { name: "Carrera 4 (385hp)", volume: "2981cc", stock: { hp: 385, torque: 450 }, stage1: { hp: 480, torque: 600, price: 1100 } },
+              { name: "Carrera 4S (450hp)", volume: "2981cc", stock: { hp: 450, torque: 530 }, stage1: { hp: 530, torque: 650, price: 1100 } },
+              { name: "Carrera GTS (480hp)", volume: "2981cc", stock: { hp: 480, torque: 570 }, stage1: { hp: 550, torque: 680, price: 1200 } },
+              { name: "Turbo (580hp)", volume: "3745cc", stock: { hp: 580, torque: 750 }, stage1: { hp: 670, torque: 900, price: 1400 } },
+              { name: "Turbo S (650hp)", volume: "3745cc", stock: { hp: 650, torque: 800 }, stage1: { hp: 720, torque: 920, price: 1400 } },
+              { name: "GT3 (510hp)", volume: "3996cc", stock: { hp: 510, torque: 470 }, stage1: { hp: 530, torque: 490, price: 1000 } },
+              { name: "GT3 RS (525hp)", volume: "3996cc", stock: { hp: 525, torque: 465 }, stage1: { hp: 545, torque: 485, price: 1100 } }
             ]
           }
         ]
@@ -1071,6 +1124,99 @@ export const TUNING_DATA: BrandData[] = [
     brand: "Alfa Romeo",
     models: [
       {
+        name: "Giulietta",
+        generations: [
+          {
+            name: "940 (2010-2020)",
+            engines: [
+              { name: "1.4 TB (120hp)", volume: "1368cc", stock: { hp: 120, torque: 206, zeroToHundred: 9.5 }, stage1: { hp: 155, torque: 260, zeroToHundred: 8.3, price: 400 } },
+              { name: "1.4 TB MultiAir (170hp)", volume: "1368cc", stock: { hp: 170, torque: 250, zeroToHundred: 7.5 }, stage1: { hp: 205, torque: 310, zeroToHundred: 6.7, price: 450 } },
+              { name: "1.6 JTDM (105hp)", volume: "1598cc", stock: { hp: 105, torque: 320, zeroToHundred: 11.2 }, stage1: { hp: 140, torque: 380, zeroToHundred: 9.8, price: 400 } },
+              { name: "1.6 JTDM (120hp)", volume: "1598cc", stock: { hp: 120, torque: 320, zeroToHundred: 10.3 }, stage1: { hp: 155, torque: 400, zeroToHundred: 9.0, price: 400 } },
+              { name: "2.0 JTDM (140hp)", volume: "1956cc", stock: { hp: 140, torque: 350, zeroToHundred: 9.5 }, stage1: { hp: 180, torque: 420, zeroToHundred: 8.3, price: 450 } },
+              { name: "2.0 JTDM (175hp)", volume: "1956cc", stock: { hp: 175, torque: 380, zeroToHundred: 8.0 }, stage1: { hp: 210, torque: 450, zeroToHundred: 7.1, price: 450 } },
+              { name: "Quadrifoglio Verde QV (240hp)", volume: "1742cc", stock: { hp: 240, torque: 340, zeroToHundred: 6.0 }, stage1: { hp: 280, torque: 410, zeroToHundred: 5.4, price: 550 } }
+            ]
+          }
+        ]
+      },
+      {
+        name: "4C",
+        generations: [
+          {
+            name: "960 (2013-2020)",
+            engines: [
+              { name: "1.75 TBi (240hp)", volume: "1742cc", stock: { hp: 240, torque: 350, zeroToHundred: 4.5 }, stage1: { hp: 280, torque: 420, zeroToHundred: 4.0, price: 600 } }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Brera",
+        generations: [
+          {
+            name: "939 (2005-2010)",
+            engines: [
+              { name: "2.2 JTS (185hp)", volume: "2198cc", stock: { hp: 185, torque: 230, zeroToHundred: 8.3 }, stage1: { hp: 205, torque: 270, zeroToHundred: 7.7, price: 450 } },
+              { name: "3.2 V6 (260hp)", volume: "3195cc", stock: { hp: 260, torque: 322, zeroToHundred: 6.8 }, stage1: { hp: 280, torque: 350, zeroToHundred: 6.3, price: 500 } },
+              { name: "2.4 JTDM (210hp)", volume: "2387cc", stock: { hp: 210, torque: 400, zeroToHundred: 7.8 }, stage1: { hp: 245, torque: 470, zeroToHundred: 7.0, price: 500 } }
+            ]
+          }
+        ]
+      },
+      {
+        name: "159",
+        generations: [
+          {
+            name: "939 (2005-2011)",
+            engines: [
+              { name: "1.9 JTS (160hp)", volume: "1859cc", stock: { hp: 160, torque: 190, zeroToHundred: 9.3 }, stage1: { hp: 180, torque: 220, zeroToHundred: 8.5, price: 400 } },
+              { name: "2.2 JTS (185hp)", volume: "2198cc", stock: { hp: 185, torque: 230, zeroToHundred: 8.6 }, stage1: { hp: 205, torque: 270, zeroToHundred: 8.0, price: 400 } },
+              { name: "3.2 V6 (260hp)", volume: "3195cc", stock: { hp: 260, torque: 322, zeroToHundred: 7.0 }, stage1: { hp: 280, torque: 350, zeroToHundred: 6.5, price: 500 } },
+              { name: "1.9 JTDM (120hp)", volume: "1910cc", stock: { hp: 120, torque: 280, zeroToHundred: 11.1 }, stage1: { hp: 155, torque: 340, zeroToHundred: 9.8, price: 400 } },
+              { name: "1.9 JTDM (150hp)", volume: "1910cc", stock: { hp: 150, torque: 320, zeroToHundred: 9.7 }, stage1: { hp: 185, torque: 390, zeroToHundred: 8.6, price: 400 } },
+              { name: "2.0 JTDM (136hp)", volume: "1956cc", stock: { hp: 136, torque: 320, zeroToHundred: 10.2 }, stage1: { hp: 175, torque: 390, zeroToHundred: 9.0, price: 450 } },
+              { name: "2.0 JTDM (170hp)", volume: "1956cc", stock: { hp: 170, torque: 360, zeroToHundred: 8.8 }, stage1: { hp: 210, torque: 430, zeroToHundred: 7.8, price: 450 } },
+              { name: "2.4 JTDM (200hp)", volume: "2387cc", stock: { hp: 200, torque: 400, zeroToHundred: 8.2 }, stage1: { hp: 235, torque: 470, zeroToHundred: 7.3, price: 500 } }
+            ]
+          }
+        ]
+      },
+      {
+        name: "Mito",
+        generations: [
+          {
+            name: "955 (2008-2018)",
+            engines: [
+              { name: "0.9 TwinAir (85hp)", volume: "875cc", stock: { hp: 85, torque: 145, zeroToHundred: 11.4 }, stage1: { hp: 115, torque: 190, zeroToHundred: 9.8, price: 350 } },
+              { name: "1.4 TB (120hp)", volume: "1368cc", stock: { hp: 120, torque: 206, zeroToHundred: 9.5 }, stage1: { hp: 155, torque: 260, zeroToHundred: 8.3, price: 400 } },
+              { name: "1.4 TB MultiAir (135hp)", volume: "1368cc", stock: { hp: 135, torque: 190, zeroToHundred: 8.9 }, stage1: { hp: 170, torque: 250, zeroToHundred: 7.9, price: 400 } },
+              { name: "1.4 TB MultiAir (170hp)", volume: "1368cc", stock: { hp: 170, torque: 250, zeroToHundred: 7.5 }, stage1: { hp: 205, torque: 310, zeroToHundred: 6.7, price: 450 } },
+              { name: "1.3 JTDM (85hp)", volume: "1248cc", stock: { hp: 85, torque: 200, zeroToHundred: 12.5 }, stage1: { hp: 115, torque: 260, zeroToHundred: 11.0, price: 350 } },
+              { name: "1.3 JTDM (95hp)", volume: "1248cc", stock: { hp: 95, torque: 200, zeroToHundred: 11.5 }, stage1: { hp: 125, torque: 270, zeroToHundred: 10.2, price: 350 } },
+              { name: "1.6 JTDM (120hp)", volume: "1598cc", stock: { hp: 120, torque: 320, zeroToHundred: 9.8 }, stage1: { hp: 155, torque: 400, zeroToHundred: 8.6, price: 400 } },
+              { name: "Quadrifoglio Verde QV (170hp)", volume: "1368cc", stock: { hp: 170, torque: 250, zeroToHundred: 7.3 }, stage1: { hp: 205, torque: 310, zeroToHundred: 6.5, price: 500 } }
+            ]
+          }
+        ]
+      },
+      {
+        name: "147",
+        generations: [
+          {
+            name: "937 (2000-2010)",
+            engines: [
+              { name: "1.6 TS (105hp)", volume: "1598cc", stock: { hp: 105, torque: 145, zeroToHundred: 11.3 }, stage1: { hp: 125, torque: 170, zeroToHundred: 10.2, price: 350 } },
+              { name: "1.6 TS (120hp)", volume: "1598cc", stock: { hp: 120, torque: 147, zeroToHundred: 10.5 }, stage1: { hp: 140, torque: 175, zeroToHundred: 9.5, price: 350 } },
+              { name: "2.0 TS (150hp)", volume: "1970cc", stock: { hp: 150, torque: 181, zeroToHundred: 9.3 }, stage1: { hp: 170, torque: 215, zeroToHundred: 8.5, price: 400 } },
+              { name: "3.2 V6 GTA (250hp)", volume: "3179cc", stock: { hp: 250, torque: 300, zeroToHundred: 6.3 }, stage1: { hp: 270, torque: 330, zeroToHundred: 5.9, price: 550 } },
+              { name: "1.9 JTD (115hp)", volume: "1910cc", stock: { hp: 115, torque: 280, zeroToHundred: 10.5 }, stage1: { hp: 145, torque: 340, zeroToHundred: 9.3, price: 400 } },
+              { name: "1.9 JTD (140hp)", volume: "1910cc", stock: { hp: 140, torque: 305, zeroToHundred: 9.4 }, stage1: { hp: 175, torque: 375, zeroToHundred: 8.3, price: 400 } }
+            ]
+          }
+        ]
+      },
+      {
         name: "Giulia",
         generations: [
           {
@@ -1078,6 +1224,9 @@ export const TUNING_DATA: BrandData[] = [
             engines: [
               { name: "2.0 Turbo (200hp)", volume: "1995cc", stock: { hp: 200, torque: 330, zeroToHundred: 6.6 }, stage1: { hp: 280, torque: 460, zeroToHundred: 5.5, price: 600 } },
               { name: "2.0 Turbo (280hp)", volume: "1995cc", stock: { hp: 280, torque: 400, zeroToHundred: 5.2 }, stage1: { hp: 310, torque: 480, zeroToHundred: 4.8, price: 600 } },
+              { name: "2.2 Turbo Diesel (160hp)", volume: "2143cc", stock: { hp: 160, torque: 380, zeroToHundred: 7.1 }, stage1: { hp: 210, torque: 480, zeroToHundred: 6.2, price: 550 } },
+              { name: "2.2 Turbo Diesel (180hp)", volume: "2143cc", stock: { hp: 180, torque: 450, zeroToHundred: 6.6 }, stage1: { hp: 230, torque: 540, zeroToHundred: 5.8, price: 550 } },
+              { name: "2.2 Turbo Diesel (210hp)", volume: "2143cc", stock: { hp: 210, torque: 470, zeroToHundred: 6.2 }, stage1: { hp: 250, torque: 550, zeroToHundred: 5.5, price: 550 } },
               { name: "2.9 V6 Quadrifoglio (510hp)", volume: "2891cc", stock: { hp: 510, torque: 600, zeroToHundred: 3.9 }, stage1: { hp: 580, torque: 720, zeroToHundred: 3.5, price: 700 } }
             ]
           }
@@ -1090,6 +1239,8 @@ export const TUNING_DATA: BrandData[] = [
             name: "949 (2017-Present)",
             engines: [
               { name: "2.0 Turbo (280hp)", volume: "1995cc", stock: { hp: 280, torque: 400, zeroToHundred: 5.7 }, stage1: { hp: 310, torque: 480, zeroToHundred: 5.2, price: 600 } },
+              { name: "2.2 Turbo Diesel (190hp)", volume: "2143cc", stock: { hp: 190, torque: 470, zeroToHundred: 6.6 }, stage1: { hp: 240, torque: 560, zeroToHundred: 5.9, price: 550 } },
+              { name: "2.2 Turbo Diesel (210hp)", volume: "2143cc", stock: { hp: 210, torque: 470, zeroToHundred: 6.2 }, stage1: { hp: 250, torque: 550, zeroToHundred: 5.6, price: 550 } },
               { name: "2.9 V6 Quadrifoglio (510hp)", volume: "2891cc", stock: { hp: 510, torque: 600, zeroToHundred: 3.8 }, stage1: { hp: 580, torque: 720, zeroToHundred: 3.4, price: 700 } }
             ]
           }

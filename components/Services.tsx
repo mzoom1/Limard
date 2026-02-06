@@ -3,6 +3,15 @@ import { Gauge, Cpu, Wind, Zap, Settings, Flame } from 'lucide-react';
 import { ServiceItem } from '../types';
 import { motion } from 'framer-motion';
 
+// Custom Exhaust Pipe Icon using image
+const DownpipeIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+  <img 
+    src="/images/pipes.png" 
+    alt="Exhaust Pipe" 
+    className={className}
+  />
+);
+
 const services: ServiceItem[] = [
   {
     id: 1,
@@ -32,7 +41,7 @@ const services: ServiceItem[] = [
     id: 5,
     title: "Exhaust & Intake",
     description: "Installation of high-flow downpipes, cat-back systems, and cold air intakes to let your engine breathe.",
-    icon: Wind
+    icon: DownpipeIcon
   },
   {
     id: 6,
