@@ -36,10 +36,12 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
   const [serviceType, setServiceType] = React.useState(initialService || (type === 'repairs' ? 'ECU Repair / Diagnostics' : type === 'performance' ? 'Stage 1 Tuning' : 'CarPlay Retrofit'));
   const [submitted, setSubmitted] = React.useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [showVehicleSelector, setShowVehicleSelector] = useState(false);
   const [quickBrand, setQuickBrand] = useState<string | undefined>(undefined);
   const [selectedDownpipe, setSelectedDownpipe] = useState<string>('');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   // Downpipe models with prices (original price * 2.5)
@@ -69,6 +71,9 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
+      }
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+        setIsMobileDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -192,7 +197,7 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!serviceType) {
-        setIsDropdownOpen(true);
+        setIsMobileDropdownOpen(true);
         return;
     }
     setSubmitted(true);
@@ -400,20 +405,20 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                                         </div>
                                     </div>
 
-                                    <div className="relative" ref={dropdownRef}>
+                                    <div className="relative" ref={mobileDropdownRef}>
                                         <button 
                                             type="button"
-                                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                            onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
                                             className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-slate-900 outline-none focus:border-slate-900 transition-all font-medium text-xs flex items-center justify-between group"
                                         >
                                             <span className={`service-label block truncate ${serviceType ? 'text-slate-900' : 'text-slate-400'}`}>
                                                 {serviceType ? SERVICES.find(s => s.value === serviceType)?.label || serviceType : 'Select Service'}
                                             </span>
-                                            <ChevronDown className={`w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-transform duration-300 flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                            <ChevronDown className={`w-4 h-4 text-slate-400 group-hover:text-slate-900 transition-transform duration-300 flex-shrink-0 ${isMobileDropdownOpen ? 'rotate-180' : ''}`} />
                                         </button>
 
                                         <AnimatePresence>
-                                            {isDropdownOpen && (
+                                            {isMobileDropdownOpen && (
                                                 <motion.div 
                                                     initial={{ opacity: 0, y: 5 }}
                                                     animate={{ opacity: 1, y: 0 }}
@@ -426,7 +431,7 @@ const Contact: React.FC<ContactProps> = ({ initialCar = '', initialPrice, initia
                                                             type="button"
                                                             onClick={() => {
                                                                 setServiceType(service.value);
-                                                                setIsDropdownOpen(false);
+                                                                setIsMobileDropdownOpen(false);
                                                             }}
                                                             className={`w-full text-left px-4 py-2.5 text-[11px] transition-colors flex items-center justify-between group ${serviceType === service.value ? 'bg-slate-50 text-brand-red font-bold' : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'}`}
                                                         >
