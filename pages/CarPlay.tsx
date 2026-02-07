@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import ServiceHighlights from '../components/ServiceHighlights';
 import Comparison from '../components/Comparison';
 import VehicleSelector from '../components/VehicleSelector';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
+import SEOHead from '../components/SEOHead';
+import { PAGE_SEO } from '../utils/seo';
 import { Product } from '../types';
 import { ArrowRight, ChevronDown, Wifi, Smartphone, Music } from 'lucide-react';
 
@@ -33,6 +35,11 @@ const CarPlay: React.FC = () => {
 
   return (
     <div className="bg-[#050505]">
+      <SEOHead 
+        title={PAGE_SEO.carplay.title}
+        description={PAGE_SEO.carplay.description}
+        keywords={PAGE_SEO.carplay.keywords}
+      />
       
       {/* 1. Cinematic Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050505]">

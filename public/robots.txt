@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://venerable-dragon-586ca8.netlify.app/sitemap.xml
+Sitemap: https://limard.vercel.app/sitemap.xml
 
 # Block admin/sensitive paths (if any in future)
 Disallow: /api/

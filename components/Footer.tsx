@@ -2,12 +2,12 @@ import React from 'react';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 interface FooterProps {
-  setActivePage?: (page: 'home' | 'carplay' | 'repairs') => void;
+  setActivePage?: (page: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms') => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
 
-  const handleNavigation = (e: React.MouseEvent, page: 'home' | 'carplay' | 'repairs', sectionId?: string) => {
+  const handleNavigation = (e: React.MouseEvent, page: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms', sectionId?: string) => {
     e.preventDefault();
     if (setActivePage) {
         setActivePage(page);
@@ -99,14 +99,9 @@ const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
                             </button>
                         </li>
                         <li>
-                            <button onClick={(e) => handleNavigation(e, 'home', 'process')} className="hover:text-brand-red transition-colors text-left">
-                                Projects
-                            </button>
-                        </li>
-                        <li>
-                            <button onClick={(e) => handleNavigation(e, 'home', 'contact')} className="hover:text-brand-red transition-colors text-left">
+                            <a href="https://files.limard.com/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors text-left">
                                 Files Portal
-                            </button>
+                            </a>
                         </li>
                         <li>
                             <button onClick={(e) => handleNavigation(e, 'home', 'contact')} className="hover:text-brand-red transition-colors text-left">
@@ -114,8 +109,13 @@ const Footer: React.FC<FooterProps> = ({ setActivePage }) => {
                             </button>
                         </li>
                         <li>
-                            <button onClick={(e) => handleNavigation(e, 'home', 'footer')} className="hover:text-brand-red transition-colors text-left">
+                            <button onClick={(e) => handleNavigation(e, 'privacy')} className="hover:text-brand-red transition-colors text-left">
                                 Privacy Policy
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={(e) => handleNavigation(e, 'terms')} className="hover:text-brand-red transition-colors text-left">
+                                Terms of Service
                             </button>
                         </li>
                     </ul>

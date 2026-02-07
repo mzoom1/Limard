@@ -3,8 +3,8 @@ import { Zap, Gauge, Calendar, Phone, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface BottomNavProps {
-  activePage: 'home' | 'carplay' | 'repairs';
-  setActivePage: (page: 'home' | 'carplay' | 'repairs') => void;
+  activePage: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms';
+  setActivePage: (page: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms') => void;
 }
 
 const BottomNav: React.FC<BottomNavProps> = ({ activePage, setActivePage }) => {

@@ -3,8 +3,8 @@ import { Menu, X, Phone, Zap, FolderOpen, Instagram, Star, Info, MessageSquare, 
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
-  activePage?: 'home' | 'carplay' | 'repairs';
-  setActivePage?: (page: 'home' | 'carplay' | 'repairs') => void;
+  activePage?: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms';
+  setActivePage?: (page: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms') => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) => {
@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage = 'home', setActivePage }) =
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (page: 'home' | 'carplay' | 'repairs', e: React.MouseEvent) => {
+  const handleNavClick = (page: 'home' | 'carplay' | 'repairs' | 'privacy' | 'terms', e: React.MouseEvent) => {
     e.preventDefault();
     if (setActivePage) {
         setActivePage(page);

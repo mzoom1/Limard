@@ -1,20 +1,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Key, Lock, Settings, ShieldCheck, Database, Zap, Wrench, ChevronRight, ChevronDown, Check, Cog, RefreshCw, Search, ArrowRight } from 'lucide-react';
+import { Cpu, Key, Database, Wrench, ChevronRight, ChevronDown, Check, Cog, RefreshCw, Search, ArrowRight } from 'lucide-react';
 import Contact from '../components/Contact';
+import SEOHead from '../components/SEOHead';
+import { PAGE_SEO } from '../utils/seo';
 
 const Repairs: React.FC = () => {
   return (
     <div className="bg-white">
+      <SEOHead 
+        title={PAGE_SEO.repairs.title}
+        description={PAGE_SEO.repairs.description}
+        keywords={PAGE_SEO.repairs.keywords}
+      />
       
       {/* 1. Technical Hero Section */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050505]">
          <div className="absolute inset-0 z-0 pointer-events-none">
              <div className="absolute inset-0">
                  <img 
-                     src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=2669&auto=format&fit=crop" 
-                     alt="Circuit Board Macro" 
+                     src="/images/hero-tuning.avif" 
+                     alt="Professional ECU repair and diagnostics laboratory in Los Angeles" 
                      className="w-full h-full object-cover opacity-30"
+                     loading="eager"
+                     fetchPriority="high"
                  />
              </div>
              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505] via-[#050505]/80 via-[#050505]/40 to-transparent"></div>
