@@ -6,7 +6,7 @@ const FloatingContact: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-[90] flex flex-col items-end gap-3">
+    <div className="hidden md:flex fixed bottom-6 right-6 z-[90] flex-col items-end gap-3">
       <AnimatePresence>
         {isOpen && (
           <>
